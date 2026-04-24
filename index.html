@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Nick's Guide to AI</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Learn AI by doing. A six-month path from zero to AI Native, for career-switchers aiming at AIOM, Forward Deployed, and applied-AI roles.">
+<meta property="og:title" content="Nick's Guide to AI">
+<meta property="og:description" content="Learn AI by doing. A six-month path from zero to AI Native.">
+<meta property="og:type" content="article">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,500;1,9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #FAF6EE;
+    --paper-deep: #F2EDE1;
+    --ink: #1A1512;
+    --ink-muted: #6B5D4F;
+    --ink-faint: #A89E8C;
+    --rule: #E5DFD3;
+    --accent: #6B4EFF;
+    --accent-soft: #EFEBFF;
+    --accent-ink: #3A24B8;
+    --flag: #C24E2E;
+    --max-w: 680px;
+    --gutter: 32px;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 17px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* progress bar */
+  #progress {
+    position: fixed; top: 0; left: 0;
+    height: 3px; width: 0%;
+    background: var(--accent);
+    z-index: 100;
+    transition: width 0.1s linear;
+  }
+
+  /* top nav */
+  .topnav {
+    position: sticky; top: 0;
+    background: rgba(250, 246, 238, 0.93);
+    backdrop-filter: saturate(180%) blur(12px);
+    -webkit-backdrop-filter: saturate(180%) blur(12px);
+    border-bottom: 1px solid var(--rule);
+    z-index: 50;
+    padding: 14px var(--gutter);
+    font-size: 13px;
+  }
+  .topnav-inner {
+    max-width: 1040px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .topnav-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: -0.01em;
+  }
+  .topnav-title span { color: var(--ink-muted); font-weight: 500; }
+  .topnav-links { display: flex; gap: 20px; }
+  .topnav-links a {
+    color: var(--ink-muted);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.15s;
+  }
+  .topnav-links a:hover { color: var(--accent); }
+  @media (max-width: 700px) {
+    .topnav-links { display: none; }
+  }
+
+  /* page container */
+  main {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 0 var(--gutter) 120px;
+  }
+
+  /* hero */
+  .hero {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 120px var(--gutter) 80px;
+    text-align: left;
+  }
+  .hero-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--accent);
+    margin-bottom: 32px;
+  }
+  .hero h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-variation-settings: 'opsz' 144, 'SOFT' 30;
+    font-size: clamp(56px, 9vw, 112px);
+    line-height: 0.95;
+    letter-spacing: -0.035em;
+    margin: 0 0 28px;
+  }
+  .hero h1 em {
+    font-style: italic;
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .hero-tagline {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-style: italic;
+    font-size: clamp(21px, 2.4vw, 28px);
+    line-height: 1.4;
+    color: var(--ink-muted);
+    max-width: 640px;
+    margin: 0 0 40px;
+  }
+  .hero-byline {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--ink-muted);
+    letter-spacing: 0.02em;
+  }
+  .hero-byline strong { color: var(--ink); font-weight: 600; }
+
+  /* section spacing */
+  section.chapter, section.intro, section.closing {
+    padding: 80px 0;
+    border-top: 1px solid var(--rule);
+  }
+  section.intro:first-of-type { border-top: none; padding-top: 40px; }
+
+  /* chapter eyebrows */
+  .chapter-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    margin-bottom: 18px;
+  }
+
+  /* chapter titles */
+  h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: clamp(36px, 5vw, 56px);
+    line-height: 1;
+    letter-spacing: -0.025em;
+    margin: 0 0 14px;
+    color: var(--ink);
+  }
+  .chapter-subtitle {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 19px;
+    line-height: 1.4;
+    color: var(--ink-muted);
+    margin: 0 0 48px;
+    max-width: 560px;
+  }
+
+  /* subsection headers */
+  h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 26px;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    margin: 56px 0 20px;
+  }
+  h4 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-muted);
+    margin: 40px 0 16px;
+  }
+
+  /* body text */
+  p {
+    margin: 0 0 20px;
+    color: var(--ink);
+  }
+  p + p { margin-top: 0; }
+  strong { font-weight: 600; color: var(--ink); }
+  em { font-style: italic; }
+
+  /* links */
+  a {
+    color: var(--accent-ink);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+    text-decoration-color: var(--accent-soft);
+    transition: text-decoration-color 0.15s;
+  }
+  a:hover { text-decoration-color: var(--accent); }
+
+  /* lists */
+  ul, ol {
+    margin: 0 0 24px;
+    padding-left: 24px;
+  }
+  li { margin-bottom: 10px; }
+  li::marker { color: var(--ink-faint); }
+
+  /* callouts */
+  .callout {
+    background: var(--accent-soft);
+    border-left: 3px solid var(--accent);
+    padding: 24px 28px;
+    margin: 32px 0;
+    border-radius: 0 8px 8px 0;
+  }
+  .callout p:last-child { margin-bottom: 0; }
+  .callout strong { color: var(--accent-ink); }
+
+  /* quote pull */
+  .pull {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 1.35;
+    color: var(--ink);
+    margin: 40px 0;
+    padding: 0 0 0 24px;
+    border-left: 2px solid var(--accent);
+  }
+
+  /* code */
+  code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9em;
+    background: var(--paper-deep);
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: var(--ink);
+  }
+  pre {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    line-height: 1.55;
+    background: var(--paper-deep);
+    color: var(--ink);
+    padding: 20px 24px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 24px 0;
+    border: 1px solid var(--rule);
+  }
+  pre code { background: none; padding: 0; font-size: inherit; }
+
+  /* numbered move cards (hero three moves) */
+  .moves {
+    display: grid;
+    gap: 32px;
+    margin: 40px 0 24px;
+  }
+  .move {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 24px;
+    padding: 28px 0;
+    border-top: 1px solid var(--rule);
+  }
+  .move-num {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: 56px;
+    line-height: 0.9;
+    color: var(--accent);
+    letter-spacing: -0.04em;
+  }
+  .move h3 {
+    margin: 0 0 10px;
+    font-size: 22px;
+  }
+  .move p { margin: 0; color: var(--ink-muted); }
+
+  /* AI Native tiers */
+  .tiers {
+    margin: 32px 0;
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .tier {
+    padding: 22px 28px;
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 24px;
+    align-items: baseline;
+    border-bottom: 1px solid var(--rule);
+  }
+  .tier:last-child { border-bottom: none; }
+  .tier-label {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--ink);
+  }
+  .tier.target {
+    background: var(--accent-soft);
+  }
+  .tier.target .tier-label { color: var(--accent-ink); }
+  .tier p { margin: 0; font-size: 15px; color: var(--ink-muted); }
+  @media (max-width: 600px) {
+    .tier { grid-template-columns: 1fr; gap: 4px; }
+  }
+
+  /* rung cards (build ladder) */
+  .rungs { margin: 32px 0; }
+  .rung {
+    padding: 28px 0;
+    border-top: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 24px;
+  }
+  .rung:last-child { border-bottom: 1px solid var(--rule); }
+  .rung-num {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: 40px;
+    line-height: 1;
+    color: var(--accent);
+    letter-spacing: -0.03em;
+  }
+  .rung h4 {
+    margin: 0 0 6px;
+    text-transform: none;
+    letter-spacing: -0.01em;
+    font-size: 21px;
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .rung-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-muted);
+    margin: 0 0 14px;
+  }
+  .rung-meta .diff-1 { color: #1E9E6F; }
+  .rung-meta .diff-2 { color: #C98A00; }
+  .rung-meta .diff-3 { color: var(--flag); }
+  .rung-meta .diff-4 { color: #8C0606; }
+  .rung-teaches {
+    margin-top: 14px;
+    font-size: 15px;
+    color: var(--ink-muted);
+  }
+  .rung-teaches strong { color: var(--ink); }
+
+  /* TOC links in intro */
+  .toc {
+    display: grid;
+    gap: 0;
+    border-top: 1px solid var(--rule);
+    margin-top: 40px;
+  }
+  .toc a {
+    display: grid;
+    grid-template-columns: 44px 1fr auto;
+    gap: 16px;
+    align-items: baseline;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--rule);
+    text-decoration: none;
+    color: var(--ink);
+    transition: padding 0.15s;
+  }
+  .toc a:hover { padding-left: 10px; }
+  .toc-num {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--accent);
+  }
+  .toc-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 22px;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+  }
+  .toc-desc {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    color: var(--ink-muted);
+    margin-top: 4px;
+  }
+  .toc-arrow {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--ink-faint);
+    font-size: 14px;
+  }
+  .toc a:hover .toc-arrow { color: var(--accent); }
+
+  /* your first hour block */
+  .first-hour {
+    background: var(--paper-deep);
+    border-radius: 10px;
+    padding: 36px 40px;
+    margin: 40px 0;
+  }
+  .first-hour h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+  }
+  .first-hour ol { margin-bottom: 0; padding-left: 22px; }
+  .first-hour li { padding-left: 6px; }
+
+  /* closing */
+  .closing-big {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: clamp(48px, 7vw, 88px);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    margin: 0 0 32px;
+  }
+  .closing-big em { font-style: italic; color: var(--accent); }
+
+  .signoff {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--ink-muted);
+    margin-top: 60px;
+    padding-top: 32px;
+    border-top: 1px solid var(--rule);
+  }
+  .signoff strong { color: var(--ink); font-weight: 600; }
+
+  /* skills grid */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 28px;
+    margin: 32px 0;
+  }
+  .skill-group {
+    padding: 28px;
+    background: var(--paper-deep);
+    border-radius: 10px;
+  }
+  .skill-group h4 {
+    margin-top: 0;
+    margin-bottom: 14px;
+    color: var(--accent-ink);
+  }
+  .skill-group ul { margin-bottom: 0; }
+
+  /* week timeline */
+  .week {
+    margin: 32px 0;
+  }
+  .week-day {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 28px;
+    padding: 20px 0;
+    border-top: 1px solid var(--rule);
+    align-items: baseline;
+  }
+  .week-day:last-child { border-bottom: 1px solid var(--rule); }
+  .week-day-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+  }
+  .week-day-content { font-size: 16px; color: var(--ink); }
+  @media (max-width: 600px) {
+    .week-day { grid-template-columns: 1fr; gap: 6px; }
+  }
+
+  /* podcast / reading groups */
+  .media-section {
+    margin: 32px 0;
+  }
+  .media-section h4 {
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    color: var(--accent);
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 10px;
+    margin-bottom: 18px;
+  }
+  .media-item {
+    padding: 10px 0;
+    display: grid;
+    grid-template-columns: minmax(140px, auto) 1fr;
+    gap: 16px;
+    align-items: baseline;
+    border-bottom: 1px solid var(--rule);
+  }
+  .media-item:last-child { border-bottom: none; }
+  .media-name {
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .media-name a { color: var(--ink); text-decoration-color: var(--accent-soft); }
+  .media-name a:hover { text-decoration-color: var(--accent); }
+  .media-desc { color: var(--ink-muted); font-size: 15px; }
+  @media (max-width: 600px) {
+    .media-item { grid-template-columns: 1fr; gap: 2px; }
+  }
+
+  /* x list */
+  .x-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 12px;
+    margin: 24px 0;
+  }
+  .x-item {
+    padding: 14px 16px;
+    background: var(--paper-deep);
+    border-radius: 6px;
+    font-size: 14px;
+  }
+  .x-item a {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+    color: var(--accent-ink);
+    text-decoration: none;
+  }
+  .x-item a:hover { text-decoration: underline; }
+  .x-item .x-desc {
+    display: block;
+    margin-top: 3px;
+    color: var(--ink-muted);
+    font-size: 13px;
+  }
+
+  /* print styles */
+  @media print {
+    @page { margin: 24mm 18mm; }
+    body { background: white; color: black; }
+    #progress, .topnav { display: none; }
+    .hero { padding: 0 0 40px; }
+    section.chapter, section.intro, section.closing { padding: 28px 0; page-break-before: auto; }
+    h2 { page-break-after: avoid; }
+    .rung, .tier, .move, .toc a { page-break-inside: avoid; }
+    a { color: black; text-decoration: underline; }
+    .callout, .first-hour, .skill-group, .x-item { background: #f4f0e5; }
+  }
+
+  /* mobile tweaks */
+  @media (max-width: 600px) {
+    .hero { padding: 60px var(--gutter) 50px; }
+    section.chapter, section.intro, section.closing { padding: 50px 0; }
+    .first-hour { padding: 24px 20px; }
+    .rung { grid-template-columns: 44px 1fr; gap: 16px; }
+    .rung-num { font-size: 32px; }
+    .move { grid-template-columns: 56px 1fr; gap: 16px; }
+    .move-num { font-size: 40px; }
+  }
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<nav class="topnav">
+  <div class="topnav-inner">
+    <div class="topnav-title">Nick's Guide to AI <span>· by Harry Toig</span></div>
+    <div class="topnav-links">
+      <a href="#fundamentals">Fundamentals</a>
+      <a href="#build">Build</a>
+      <a href="#claude-code">Claude Code</a>
+      <a href="#follow">Follow</a>
+      <a href="#role">The Role</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-eyebrow">A guide for career switchers</div>
+  <h1>Nick's Guide to <em>AI</em></h1>
+  <p class="hero-tagline">Learn AI by doing it. A path from zero to AI Native, for anyone aiming at AIOM, Forward Deployed, or any applied-AI role.</p>
+  <div class="hero-byline"><strong>by Harry Toig</strong> · AI Outcomes Manager at Glean</div>
+</header>
+
+<main>
+
+<section class="intro">
+  <p><strong>No prerequisites.</strong> No CS degree required. Four years ago I was in finance at Snowflake. Then I watched some YouTube videos, talked to a guy named Max Comolli, and started building. I am now an AI Outcomes Manager at Glean. The ladder is climbable.</p>
+  <p class="pull">The thesis: learn AI by doing it. Not by reading about it. Not by grinding courses. Not by polishing your resume. Pay $20 a month for Claude, build five things, and be dangerous in six months.</p>
+  <p>This guide is structured around a specific end state: <strong>becoming an AIOM (AI Outcomes Manager)</strong> or any adjacent applied-AI role: Forward Deployed Engineer, Solutions Engineer, AI Product Manager, Customer Engineer. These roles exist between the people building frontier models and the customers trying to use them. They are the most gettable jobs in AI if you come from a non-technical background, and they are the ones that actually teach you the craft.</p>
+
+  <h3 style="margin-top:60px;">The North Star: AI Native</h3>
+  <p>Glean's internal framework for AI fluency has three tiers. The hiring bar for AIOM is the top one.</p>
+  <div class="tiers">
+    <div class="tier">
+      <div class="tier-label">AI Literate</div>
+      <p>Uses ChatGPT competently. Writes decent prompts. Below the floor.</p>
+    </div>
+    <div class="tier">
+      <div class="tier-label">AI Proficient</div>
+      <p>Has built agents. Uses Claude Code. Has workflows that measurably change their output.</p>
+    </div>
+    <div class="tier target">
+      <div class="tier-label">AI Native ←</div>
+      <p>Builds habitually. Architects workflows from scratch. Iterates prompts as craft. Debugs failure modes. Can't imagine working without these tools.</p>
+    </div>
+  </div>
+  <p>AI Native is not a credential. It is what you are after you have shipped enough things. You get there by building.</p>
+</section>
+
+<section class="intro">
+  <h3>The Three Moves That Matter</h3>
+  <p>In order. Not negotiable.</p>
+  <div class="moves">
+    <div class="move">
+      <div class="move-num">01</div>
+      <div>
+        <h3>Understand it.</h3>
+        <p>Spend ten hours with the right people explaining what an LLM actually is. Not hype videos. The real ones.</p>
+      </div>
+    </div>
+    <div class="move">
+      <div class="move-num">02</div>
+      <div>
+        <h3>Use it every day.</h3>
+        <p>Until you have gut feel for what these things can and can't do, no amount of theory will save you.</p>
+      </div>
+    </div>
+    <div class="move">
+      <div class="move-num">03</div>
+      <div>
+        <h3>Build something.</h3>
+        <p>Not a to-do app. Something that only exists because AI exists. The single highest-leverage thing you can do. Everything else is commentary.</p>
+      </div>
+    </div>
+  </div>
+  <p>If you are short on time, start with #3. You can reverse-engineer the other two from there.</p>
+</section>
+
+<section class="intro">
+  <h3>The Guide</h3>
+  <nav class="toc">
+    <a href="#fundamentals">
+      <span class="toc-num">01</span>
+      <span>
+        <span class="toc-title">Fundamentals</span>
+        <span class="toc-desc">Videos and courses to actually understand how LLMs work.</span>
+      </span>
+      <span class="toc-arrow">→</span>
+    </a>
+    <a href="#build">
+      <span class="toc-num">02</span>
+      <span>
+        <span class="toc-title">Build</span>
+        <span class="toc-desc">Nine projects to ship, sorted by dependency.</span>
+      </span>
+      <span class="toc-arrow">→</span>
+    </a>
+    <a href="#claude-code">
+      <span class="toc-num">03</span>
+      <span>
+        <span class="toc-title">Claude Code</span>
+        <span class="toc-desc">The daily-driver setup you should steal.</span>
+      </span>
+      <span class="toc-arrow">→</span>
+    </a>
+    <a href="#follow">
+      <span class="toc-num">04</span>
+      <span>
+        <span class="toc-title">What to Follow</span>
+        <span class="toc-desc">Podcasts, blogs, and X accounts worth your time.</span>
+      </span>
+      <span class="toc-arrow">→</span>
+    </a>
+    <a href="#role">
+      <span class="toc-num">05</span>
+      <span>
+        <span class="toc-title">The Role</span>
+        <span class="toc-desc">What AIOMs actually do, and what skills get you there.</span>
+      </span>
+      <span class="toc-arrow">→</span>
+    </a>
+  </nav>
+</section>
+
+<section class="intro">
+  <div class="first-hour">
+    <h3>Your First Hour</h3>
+    <p>If you do nothing else this week, do these five things today.</p>
+    <ol>
+      <li><strong>Pay for Claude.</strong> $20 per month. Use it for everything: writing, summarizing, planning, thinking. You cannot learn AI on the free tier.</li>
+      <li><strong>Install Claude Code.</strong> <code>npm install -g @anthropic-ai/claude-code</code>. Point it at your laptop. Ask it to do something useful.</li>
+      <li><strong>Watch <a href="https://www.youtube.com/watch?v=zjkBMFhNj_g" target="_blank" rel="noopener">Karpathy's "Intro to Large Language Models"</a></strong> (one hour, free). The highest-density AI explainer that exists.</li>
+      <li><strong>Subscribe to <a href="https://simonwillison.net/" target="_blank" rel="noopener">Simon Willison's blog</a>.</strong> He reads the internet so you don't have to.</li>
+      <li><strong>Pick a project from <a href="#build">Build</a>.</strong> Start today. Finish it this week. Ship it publicly.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- CHAPTER 01 -->
+<section class="chapter" id="fundamentals">
+  <div class="chapter-eyebrow">Chapter 01</div>
+  <h2>Fundamentals</h2>
+  <p class="chapter-subtitle">How LLMs work, what to learn first, and what to skip.</p>
+
+  <p>You do not need to understand attention math to be dangerous at this job. You do need a working mental model of what a language model is, what it can and can't do, and how the primitives (prompts, context, tools, agents) fit together. That's what this chapter buys you.</p>
+
+  <h3>Core (watch these, ~5-6 hours)</h3>
+  <p>The ones I'd watch first and the ones I re-watch.</p>
+  <ol>
+    <li><strong>Andrej Karpathy, <a href="https://www.youtube.com/watch?v=zjkBMFhNj_g" target="_blank" rel="noopener">Intro to Large Language Models</a></strong> (1 hr). The single best "what is an LLM" video ever made. Non-technical but substantive. Start here.</li>
+    <li><strong>Andrej Karpathy, <a href="https://www.youtube.com/watch?v=LCEmiRjPEtQ" target="_blank" rel="noopener">Software Is Changing (Again)</a></strong> (40 min). The Software 1.0 → 2.0 → 3.0 framing. Essential mental model for where this is going.</li>
+    <li><strong>Andrej Karpathy, "Deep Dive into LLMs like ChatGPT"</strong> (3.5 hr, Feb 2025). The full stack: pretraining, fine-tuning, RLHF, why hallucinations happen. Find it on <a href="https://www.youtube.com/@AndrejKarpathy" target="_blank" rel="noopener">his YouTube channel</a>.</li>
+    <li><strong>Boris Cherny on Lenny's Podcast</strong> (~90 min). Head of Claude Code on product philosophy. Watch this before you try to use Claude Code seriously. Also find his <a href="https://www.latent.space/p/claude-code" target="_blank" rel="noopener">Latent Space appearance</a> for the technical version.</li>
+  </ol>
+
+  <h3>Do (hands-on training, ~5 hours)</h3>
+  <p>Watching isn't enough. These are the tutorials you actually run.</p>
+  <ol>
+    <li><strong><a href="https://github.com/anthropics/courses" target="_blank" rel="noopener">Anthropic's Prompt Engineering Interactive Tutorial</a></strong> (free, 9 chapters of Jupyter notebooks, ~4 hr). The best free prompt engineering course that exists. Do every exercise. This is the single highest-ROI thing on this page.</li>
+    <li><strong><a href="https://www.youtube.com/watch?v=ysPbXH0LpIE" target="_blank" rel="noopener">Code w/ Claude: Prompting 101</a></strong> (Anthropic applied team, 45 min). Real production prompting patterns, not toy examples.</li>
+    <li><strong>Read the Claude docs.</strong> Start with <a href="https://docs.claude.com/en/docs/build-with-claude/tool-use/overview" target="_blank" rel="noopener">Agents and Tool Use</a> and <a href="https://docs.claude.com/en/docs/agents-and-tools/mcp" target="_blank" rel="noopener">Model Context Protocol</a>. Skim them now, come back when you're stuck.</li>
+  </ol>
+
+  <h3>Optional depth (for when the itch strikes)</h3>
+  <p>Not required for the AIOM path. Worth it if you're curious.</p>
+  <ul>
+    <li><strong>Karpathy, <a href="https://www.youtube.com/watch?v=kCc8FmEb1nY" target="_blank" rel="noopener">Let's build GPT from scratch</a></strong> (2 hr). Codes GPT live. The highlight of his Zero to Hero series.</li>
+    <li><strong>Karpathy, <a href="https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ" target="_blank" rel="noopener">Neural Networks: Zero to Hero</a></strong> (7 videos, ~15 hr). Builds neural nets from scratch: micrograd → makemore → nanoGPT. If you want internals, the best playlist ever made.</li>
+    <li><strong>3Blue1Brown, <a href="https://www.youtube.com/watch?v=wjZofJX0v4M" target="_blank" rel="noopener">But what is a GPT?</a></strong> and <a href="https://www.youtube.com/watch?v=eMlx5fFNoYc" target="_blank" rel="noopener">Attention in transformers</a> (~50 min together). Animated visual explainers. For the "I'm not a math person but I want intuition" case.</li>
+    <li><strong><a href="https://simonwillison.net/tags/my-talks/" target="_blank" rel="noopener">Simon Willison's talks</a>.</strong> Running commentary on LLMs as a working tool.</li>
+  </ul>
+
+  <h3>Skip</h3>
+  <p>Be ruthless about what you skip. The field moves fast enough that wrong-era resources cost you more than they teach.</p>
+  <ul>
+    <li><strong>LangChain courses.</strong> AIOMs work on agent platforms, not LangChain.</li>
+    <li><strong>fast.ai Practical Deep Learning.</strong> Great course, wrong audience. It's for ML researchers, not AIOMs.</li>
+    <li><strong>Hugging Face LLM Course.</strong> Fine-tuning and deployment aren't AIOM-core.</li>
+    <li><strong>Most Lex Fridman AI episodes.</strong> Occasional gems, mostly length.</li>
+    <li><strong>Anything from pre-2023 on practical LLMs.</strong> The field has moved twice since. Theory ages well. Practical takes expire in 18 months.</li>
+  </ul>
+
+  <div class="callout">
+    <p><strong>Four-week path.</strong> Week 1: Intro to LLMs + Software Is Changing + Prompt Eng Tutorial (first 3 chapters). Week 2: finish the tutorial + Code w/ Claude: Prompting 101 + read Agents/Tool Use docs. Week 3: Deep Dive into LLMs + Boris Cherny on Lenny's. Week 4: start building.</p>
+    <p>You don't need to finish every video before you build. You learn faster by building halfway through.</p>
+  </div>
+</section>
+
+<!-- CHAPTER 02 -->
+<section class="chapter" id="build">
+  <div class="chapter-eyebrow">Chapter 02 · The most important chapter</div>
+  <h2>Build</h2>
+  <p class="chapter-subtitle">Nine real projects, sorted so each one teaches something the next depends on.</p>
+
+  <p>Theory is table stakes. Podcasts are background radiation. <strong>Projects are the thing.</strong></p>
+  <p>If you do nothing else in this guide, do this ladder. By rung 7 you can hold a coherent technical conversation with anyone hiring for an AIOM, Forward Deployed Engineer, Applied AI Engineer, Customer Engineer, or AI PM role.</p>
+
+  <div class="callout">
+    <p><strong>The Rule.</strong> Ship every project publicly. GitHub repo + 90-second Loom + LinkedIn post. The artifacts ARE your portfolio. A resume with "interested in AI" is worth nothing. A GitHub profile with nine shipped AI projects is worth a job.</p>
+  </div>
+
+  <div class="rungs">
+    <div class="rung">
+      <div class="rung-num">1</div>
+      <div>
+        <h4>Automate one annoying task with Claude Code</h4>
+        <p class="rung-meta"><span class="diff-1">Difficulty 1</span> · 2-4 hours</p>
+        <p>Pick one friction point you actually hate: inbox triage, meal planning from fridge photos, weekly calendar summary, workout logging. Install Claude Code, describe the task, iterate until it works.</p>
+        <p class="rung-teaches"><strong>Teaches:</strong> how agents behave, why context matters, prompts as specifications. Easy entry and a preview of how you'll spend days as an AIOM.</p>
+      </div>
+    </div>
+
+    <div class="rung">
+      <div class="rung-num">2</div>
+      <div>
+        <h4>Build a chatbot with the Claude API</h4>
+        <p class="rung-meta"><span class="diff-1">Difficulty 1</span> · one weekend</p>
+        <p>Single-file Python script hitting the Claude API with a system prompt (a persona). Use the <a href="https://docs.claude.com/en/docs/get-started" target="_blank" rel="noopener">Anthropic quickstart</a>.</p>
+        <p class="rung-teaches"><strong>Teaches:</strong> API calls, tokens, system vs. user messages. Removes the abstraction so you see what's actually happening behind every agent builder.</p>
+      </div>
+    </div>
+
+    <div class="rung">
+      <div class="rung-num">3</div>
+      <div>
+        <h4>RAG over your own notes</h4>
+        <p class="rung-meta"><span class="diff-2">Difficulty 2</span> · one weekend</p>
+        <p>Start easy: drag your journal, Notion export, or Obsidian vault into Claude Projects and chat with it. Then rebuild from scratch with LlamaIndex or the <a href="https://platform.claude.com/cookbook/capabilities-retrieval-augmented-generation-guide" target="_blank" rel="noopener">Anthropic RAG cookbook</a>.</p>
+        <p class="rung-teaches"><strong>Teaches:</strong> embeddings, chunking, and the truth that retrieval quality is the whole ballgame. You need to explain RAG to a non-technical stakeholder in 90 seconds. Build one, and you can.</p>
+      </div>
+    </div>
+
+    <div class="rung">
+      <div class="rung-num">4</div>
+      <div>
+        <h4>Build a tool-use agent</h4>
+        <p class="rung-meta"><span class="diff-2">Difficulty 2</span> · one week</p>
+        <p>Claude with the tool_use API. A bot that reads your calendar, checks weather, and texts you a day plan. Or a finance agent that reads Plaid transactions and yells at you about your grocery bill.</p>
+        <p class="rung-teaches"><strong>Teaches:</strong> function calling, agent loops, and (most importantly) why agents fail. Ambiguous tools, bad state handling, retry strategies, when to ask a human. The meat of the AIOM job.</p>
+      </div>
+    </div>
+
+    <div class="rung">
+      <div class="rung-num">5</div>
+      <div>
+        <h4>Install MCP servers and write a custom one</h4>
+        <p class="rung-meta"><span class="diff-2">Difficulty 2</span> · a few hours</p>
+        <p>Install two or three MCP servers in Claude Desktop: Gmail, Google Calendar, Plaid. Then write a tiny custom MCP server using <a href="https://modelcontextprotocol.io/quickstart/server" target="_blank" rel="noopener">Anthropic's Python template</a>. Point Claude at something weird in your life.</p>
+        <p class="rung-teaches"><strong>Teaches:</strong> what MCP is and why it's the direction the industry is going. Table stakes now; a floor in six months.</p>
+      </div>
+    </div>
+
+    <div class="rung">
+      <div class="rung-num">6</div>
+      <div>
+        <h4>Build an agent on a no-code platform</h4>
+        <p class="rung-meta"><span class="diff-1">Difficulty 1</span> · 2-4 hours</p>
+        <p>Glean Agent Builder if you're at a Glean customer. Otherwise <a href="https://dify.ai/" target="_blank" rel="noopener">Dify</a>, <a href="https://flowiseai.com/" target="_blank" rel="noopener">Flowise</a>, <a href="https://langflow.org/" target="_blank" rel="noopener">LangFlow</a>, or n8n's AI nodes. Build a three-step agent with retrieval, an LLM step, and a tool call.</p>
+        <p class="rung-teaches"><strong>Teaches:</strong> what "building an agent" looks like when the platform abstracts the API. Exactly what AIOMs do with customers all day.</p>
+      </div>
+    </div>
+
+    <div class="rung">
+      <div class="rung-num">7</div>
+      <div>
+        <h4>Write a simple eval for one of your agents</h4>
+        <p class="rung-meta"><span class="diff-3">Difficulty 3</span> · half a day</p>
+        <p>Pick an agent you already built. Write 10-20 test cases with expected outputs. Run them. Score pass/fail. Change one thing in the prompt. Score again.</p>
+        <p class="rung-teaches"><strong>Teaches:</strong> you cannot ship what you cannot measure. The skill that separates hobbyists from people who get hired. See Anthropic's <a href="https://docs.claude.com/en/docs/test-and-evaluate/define-success" target="_blank" rel="noopener">evaluation framework guide</a>.</p>
+      </div>
+    </div>
+
+    <div class="rung">
+      <div class="rung-num">8</div>
+      <div>
+        <h4>Deploy a public chatbot with the Vercel AI SDK</h4>
+        <p class="rung-meta"><span class="diff-2">Difficulty 2</span> · one weekend</p>
+        <p>Clone <a href="https://github.com/vercel/chatbot" target="_blank" rel="noopener">vercel/chatbot</a>, customize, deploy to a public URL. Get 10 friends to use it. Watch the logs.</p>
+        <p class="rung-teaches"><strong>Teaches:</strong> streaming, React hooks, and (crucially) shipping to real users. The gap most tutorials skip.</p>
+      </div>
+    </div>
+
+    <div class="rung">
+      <div class="rung-num">9</div>
+      <div>
+        <h4>Make Claude Code your daily driver</h4>
+        <p class="rung-meta"><span class="diff-3">Difficulty 3</span> · ongoing</p>
+        <p>Custom slash commands. Rules files. Skills. MCPs. Replace five manual workflows with Claude-Code-driven ones. Commit your setup to a repo.</p>
+        <p class="rung-teaches"><strong>Teaches:</strong> all of it. The project AIOM interviewers want to see. See <a href="#claude-code">Claude Code</a> for the setup.</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>Optional depth</h3>
+  <p>For the curious, not AIOM-core.</p>
+  <ul>
+    <li><strong>Karpathy's makemore + nanoGPT</strong> (Difficulty 4, 1-2 weeks). Watch Zero to Hero, code along, train a tiny model on your own writing. Credibility-bank.</li>
+    <li><strong>Fine-tune a small model</strong> (Difficulty 3, one week). Gemma 3 or Phi-3 on Colab free tier. Teaches data quality beats model size.</li>
+    <li><strong>Voice app: Whisper + Claude + ElevenLabs</strong> (Difficulty 3, one week). Record, transcribe, reason, speak. Teaches multi-model pipelines.</li>
+  </ul>
+
+  <h3>Ideas if you want more</h3>
+  <ul>
+    <li>Home-finance agent that categorizes Plaid transactions and flags weird spending.</li>
+    <li>"What did I do this week" agent that summarizes your git commits, calendar, and journal.</li>
+    <li>Personal health tracker that ingests Oura data, lab results, and meal photos.</li>
+    <li>Slack bot that reads your team's channels and drafts a weekly digest.</li>
+    <li>Agent that watches your Gong or Granola transcripts and drafts follow-up emails.</li>
+  </ul>
+
+  <div class="callout">
+    <p><strong>One rule before you start.</strong> Pick the smallest version you can finish this week. Shipped and ugly beats unshipped and beautiful. You learn 10x more from one deployed project than from three half-built ones.</p>
+    <p><strong>After you ship.</strong> GitHub README → 90-second Loom → LinkedIn post → tweet it. Simon Willison, Ethan Mollick, and Alex Albert actually reply to people shipping good work. Ship and they'll find you.</p>
+  </div>
+</section>
+
+<!-- CHAPTER 03 -->
+<section class="chapter" id="claude-code">
+  <div class="chapter-eyebrow">Chapter 03</div>
+  <h2>Claude Code</h2>
+  <p class="chapter-subtitle">The daily-driver setup you should steal.</p>
+
+  <p>Claude Code is a command-line tool from Anthropic. You type plain English; it writes code, edits files, runs commands, and hands back results. It is better than ChatGPT for anything involving your actual filesystem: writing docs, editing code, automating workflows, building projects from zero.</p>
+  <p>It is the single biggest productivity unlock I have found in the last two years. I use it for customer work, my finances, health tracking, side projects, and most meaningful typing I do at a computer. Pay the $20 a month for Claude and use the hell out of it.</p>
+
+  <h3>Install</h3>
+  <pre><code>npm install -g @anthropic-ai/claude-code</code></pre>
+  <p>You need Node.js. If you don't have it, <code>brew install node</code>. If you don't have Homebrew, install it first.</p>
+  <p>Then <code>cd</code> to a folder and type <code>claude</code>. That is it.</p>
+
+  <h3>The six things worth configuring</h3>
+  <p>Ignore all of this for your first week. Just start using Claude Code on real tasks. When it gets frustrating in the same way twice, come back here.</p>
+
+  <h4>1. CLAUDE.md</h4>
+  <p>A <code>CLAUDE.md</code> file at the root of any project gets read every session. Use it to tell Claude who you are, how to talk to you, what tools to prefer, and what to avoid. Put one at <code>~/CLAUDE.md</code> so Claude knows you across every project.</p>
+
+  <h4>2. Rules files</h4>
+  <p>For longer preferences, split into <code>~/.claude/rules/*.md</code>, one file per topic. Mine: personal-context, tool-routing, parallel-execution, memory-and-persistence, reminders. They auto-load every session.</p>
+
+  <h4>3. Slash commands</h4>
+  <p>A slash command is a reusable prompt you invoke with <code>/name</code>. Drop a markdown file into <code>~/.claude/commands/</code>. Good ones to build: <code>/morning</code>, <code>/evening</code>, <code>/standup</code>, <code>/brief [customer]</code>, <code>/log</code>. If you use the same prompt three times, make it a command.</p>
+
+  <h4>4. Skills</h4>
+  <p>Skills are commands' more structured cousin. Multi-step, can spawn sub-agents, can ship with their own domain knowledge. If a command gets longer than 30 lines or needs sub-steps, promote it to a skill.</p>
+
+  <h4>5. MCPs (Model Context Protocols)</h4>
+  <p>Plug-in tool servers that let Claude talk to external services. Install early: Google Calendar / Gmail MCP, Granola MCP for meetings, Plaid MCP for finance, Glean MCP for work knowledge, Computer Use MCP for desktop control. This is where the rabbit hole begins.</p>
+
+  <h4>6. Memory</h4>
+  <p>Claude Code writes auto-memory notes to <code>~/.claude/projects/[project]/memory/</code> across sessions. It remembers preferences, corrections, tool mistakes. You can prompt directly: "remember that I prefer X over Y." Pattern: <code>MEMORY.md</code> as an index under 200 lines, topic files for tool-lessons, preferences, debugging.</p>
+
+  <h3>First week</h3>
+  <ul>
+    <li>Ask Claude to read your entire Downloads folder and categorize what's in it.</li>
+    <li>Summarize your last 30 days of journal entries. Find out what you're obsessing over.</li>
+    <li>Build a one-page website from a rough description and deploy to Vercel.</li>
+    <li>Write a slash command for your morning routine: calendar check, top news, day plan.</li>
+    <li>Point it at an annoying manual process you do weekly and have it write the bash script.</li>
+  </ul>
+  <p>Use Claude Code as your primary interface for a week. You won't want to go back.</p>
+
+  <div class="callout">
+    <p><strong>Warning.</strong> Claude Code can do destructive things. Don't give it unsupervised access to production databases. Don't let it <code>rm -rf</code> blindly. Always confirm before a <code>git push</code>.</p>
+  </div>
+</section>
+
+<!-- CHAPTER 04 -->
+<section class="chapter" id="follow">
+  <div class="chapter-eyebrow">Chapter 04</div>
+  <h2>What to Follow</h2>
+  <p class="chapter-subtitle">Podcasts, blogs, and X accounts worth your time.</p>
+
+  <p>Pick 2 podcasts, 2 newsletters, and a dozen X follows. Consistency beats breadth. If you try to follow everyone, you follow no one. The goal is calibrated intuition, not winning a Jeopardy category.</p>
+
+  <h3>Podcasts (actually in my Spotify)</h3>
+
+  <div class="media-section">
+    <h4>AI-focused</h4>
+    <div class="media-item"><div class="media-name">AI Daily Brief</div><div class="media-desc">Nathaniel Whittemore. 10 minutes a day. Best signal-to-noise for AI news. My morning default.</div></div>
+    <div class="media-item"><div class="media-name">TBPN</div><div class="media-desc">Tech, markets, AI. Go for the shortened versions. The full episodes run long.</div></div>
+    <div class="media-item"><div class="media-name">No Priors</div><div class="media-desc">Sarah Guo + Elad Gil. VC-flavored, technically sharp. Guests run the industry.</div></div>
+    <div class="media-item"><div class="media-name">Training Data</div><div class="media-desc">Sequoia. Short, founder-focused AI interviews.</div></div>
+    <div class="media-item"><div class="media-name">Latent Space</div><div class="media-desc">swyx + Alessio. The builder's show. Infra, evals, agent frameworks.</div></div>
+    <div class="media-item"><div class="media-name">How I AI</div><div class="media-desc">Claire Vo. How people actually use AI in their work, week by week.</div></div>
+  </div>
+
+  <div class="media-section">
+    <h4>Broader tech rotation</h4>
+    <div class="media-item"><div class="media-name">Stratechery</div><div class="media-desc">Ben Thompson. Strategy takes on tech and AI. Also the paid newsletter below.</div></div>
+    <div class="media-item"><div class="media-name">All-In</div><div class="media-desc">Chamath, Jason, Sacks, Friedberg. Skip heavy politics; the tech/markets takes are the reason.</div></div>
+    <div class="media-item"><div class="media-name">Lenny's Podcast</div><div class="media-desc">PM + career. The Boris Cherny episode on Claude Code is a must.</div></div>
+    <div class="media-item"><div class="media-name">BG2Pod</div><div class="media-desc">Brad Gerstner + Bill Gurley. Tech investing, strategic.</div></div>
+    <div class="media-item"><div class="media-name">Y Combinator Podcast</div><div class="media-desc">Founder-focused.</div></div>
+    <div class="media-item"><div class="media-name">This Week in Startups</div><div class="media-desc">Jason Calacanis.</div></div>
+    <div class="media-item"><div class="media-name">Moonshots</div><div class="media-desc">Peter Diamandis. Future tech, optimism-heavy.</div></div>
+    <div class="media-item"><div class="media-name">My First Million</div><div class="media-desc">Entrepreneurship.</div></div>
+  </div>
+
+  <div class="media-section">
+    <h4>Worth adding for depth</h4>
+    <div class="media-item"><div class="media-name"><a href="https://www.dwarkesh.com/podcast" target="_blank" rel="noopener">Dwarkesh Podcast</a></div><div class="media-desc">Long, unhurried interviews with the people actually building frontier AI. Dario, Hassabis, Ilya, Karpathy. I don't currently listen; you should.</div></div>
+  </div>
+
+  <h3>Reading</h3>
+
+  <div class="media-section">
+    <h4>What I pay for</h4>
+    <div class="media-item"><div class="media-name"><a href="https://stratechery.com/" target="_blank" rel="noopener">Stratechery</a></div><div class="media-desc">Ben Thompson, paid. Clearest strategic thinking on what AI means for incumbents, platforms, and power. Worth every dollar.</div></div>
+  </div>
+
+  <div class="media-section">
+    <h4>Worth adding</h4>
+    <div class="media-item"><div class="media-name"><a href="https://simonwillison.net/" target="_blank" rel="noopener">Simon Willison's weblog</a></div><div class="media-desc">Free. The single best daily AI writer working. Ships tools, tests every model, links everything that matters.</div></div>
+    <div class="media-item"><div class="media-name"><a href="https://importai.substack.com/" target="_blank" rel="noopener">Import AI</a></div><div class="media-desc">Jack Clark, Anthropic cofounder. Weekly. Policy, capability jumps, strategic framing from inside the frontier.</div></div>
+  </div>
+
+  <h3>X</h3>
+  <p>The dozen I actually follow, plus two official accounts.</p>
+  <div class="x-grid">
+    <div class="x-item"><a href="https://x.com/karpathy" target="_blank" rel="noopener">@karpathy</a><span class="x-desc">Teaches more in a thread than most courses.</span></div>
+    <div class="x-item"><a href="https://x.com/simonw" target="_blank" rel="noopener">@simonw</a><span class="x-desc">Live-tweets every model release with tests.</span></div>
+    <div class="x-item"><a href="https://x.com/dwarkesh_sp" target="_blank" rel="noopener">@dwarkesh_sp</a><span class="x-desc">Podcast clips and takes.</span></div>
+    <div class="x-item"><a href="https://x.com/DarioAmodei" target="_blank" rel="noopener">@DarioAmodei</a><span class="x-desc">Anthropic CEO. Rare but signal-heavy.</span></div>
+    <div class="x-item"><a href="https://x.com/sama" target="_blank" rel="noopener">@sama</a><span class="x-desc">OpenAI CEO. Watch the vibes, not the words.</span></div>
+    <div class="x-item"><a href="https://x.com/nlw" target="_blank" rel="noopener">@nlw</a><span class="x-desc">Nathaniel Whittemore, AI Daily Brief host.</span></div>
+    <div class="x-item"><a href="https://x.com/swyx" target="_blank" rel="noopener">@swyx</a><span class="x-desc">Latent Space, builder scene.</span></div>
+    <div class="x-item"><a href="https://x.com/AlexAlbert__" target="_blank" rel="noopener">@AlexAlbert__</a><span class="x-desc">Prompt craft and Claude tips.</span></div>
+    <div class="x-item"><a href="https://x.com/jackclarkSF" target="_blank" rel="noopener">@jackclarkSF</a><span class="x-desc">Policy and capability reasoning.</span></div>
+    <div class="x-item"><a href="https://x.com/benthompson" target="_blank" rel="noopener">@benthompson</a><span class="x-desc">Stratechery.</span></div>
+    <div class="x-item"><a href="https://x.com/rileybrown" target="_blank" rel="noopener">@rileybrown</a><span class="x-desc">Vibe coder, practical AI user.</span></div>
+    <div class="x-item"><a href="https://x.com/alexfinn" target="_blank" rel="noopener">@alexfinn</a><span class="x-desc">Vibe coder, practical AI user.</span></div>
+    <div class="x-item"><a href="https://x.com/AnthropicAI" target="_blank" rel="noopener">@AnthropicAI</a><span class="x-desc">Official announcements.</span></div>
+    <div class="x-item"><a href="https://x.com/OpenAI" target="_blank" rel="noopener">@OpenAI</a><span class="x-desc">Official announcements.</span></div>
+  </div>
+  <p>Skip crypto, culture war, and anyone who makes you feel worse after reading them. Your attention is the most valuable input you have.</p>
+
+  <h3>How I actually use this</h3>
+  <div class="week">
+    <div class="week-day"><div class="week-day-label">Morning</div><div class="week-day-content">AI Daily Brief on the subway. 10 minutes.</div></div>
+    <div class="week-day"><div class="week-day-label">Commute</div><div class="week-day-content">TBPN shortened versions. All-In or BG2Pod on long flights.</div></div>
+    <div class="week-day"><div class="week-day-label">Weekly</div><div class="week-day-content">Stratechery when Ben ships a big one.</div></div>
+    <div class="week-day"><div class="week-day-label">Ambient</div><div class="week-day-content">X feed, tightly curated. Mute generously.</div></div>
+  </div>
+  <p class="pull">Consistency beats volume. If you're consuming more than you're building, your ratio is off.</p>
+</section>
+
+<!-- CHAPTER 05 -->
+<section class="chapter" id="role">
+  <div class="chapter-eyebrow">Chapter 05</div>
+  <h2>The Role</h2>
+  <p class="chapter-subtitle">What AIOMs actually do, and what skills you need to get there.</p>
+
+  <p>You are not going to become an AI researcher at Anthropic without a PhD. Fine. The most valuable roles in AI right now are not research roles. They are the people who stand between a research lab and a paying customer: <strong>Forward Deployed Engineers, Applied AI Engineers, Customer Engineers, AI Outcomes Managers</strong>. They build prototypes against real customer data, run enablement, turn ambiguous pain into shippable agents, and feed what they learn back into the product.</p>
+  <p>These roles are aggressively gettable if you come from a non-technical background. And they're the ones that actually teach you the craft.</p>
+
+  <h3>A typical AIOM week</h3>
+  <p>A real week. Not polished. Representative.</p>
+  <div class="week">
+    <div class="week-day"><div class="week-day-label">Monday</div><div class="week-day-content">Build a campaign-brief-generator agent for a customer's marketing team that pulls from Snowflake. 90 minutes use-case discovery, 90 prompt iteration, 60 testing.</div></div>
+    <div class="week-day"><div class="week-day-label">Tuesday</div><div class="week-day-content">Roll out an agent champion program at a 3,000-person enterprise. Train 15 department leads. Write a best-practices doc.</div></div>
+    <div class="week-day"><div class="week-day-label">Wednesday</div><div class="week-day-content">Help another AIOM unblock their customer. Post 500 words in #aiom-team on a technical pattern. Interview a candidate.</div></div>
+    <div class="week-day"><div class="week-day-label">Thursday</div><div class="week-day-content">Executive briefing at a Fortune 500. Present agent portfolio, usage numbers, 90-day plan. Schedule the next six weeks of work.</div></div>
+    <div class="week-day"><div class="week-day-label">Friday</div><div class="week-day-content">Ship a new Claude Code skill to automate part of your own job. Run a 160-person webinar on prompt engineering. Log everything.</div></div>
+  </div>
+  <p>You are a hybrid consultant / prompt engineer / product thinker. Scored on <strong>adoption</strong> (is the customer actually using it?) and <strong>power agents</strong> (are the agents still used weekly, months later?). Both metrics reward learn-by-doing. Neither rewards talk.</p>
+
+  <h3>The skills that matter</h3>
+  <div class="skills-grid">
+    <div class="skill-group">
+      <h4>Technical must-haves</h4>
+      <ul>
+        <li><strong>Prompting as craft.</strong> <em>Role → Task → Context → Reasoning → Output → Stop Condition.</em> Iteration, not one-shot.</li>
+        <li><strong>Agent design.</strong> Retrieval, grounding, guardrails, tool calling, multi-step flows.</li>
+        <li><strong>RAG fundamentals.</strong> Explain it to a non-technical Sales Director in 90 seconds.</li>
+        <li><strong>LLM fundamentals.</strong> Context windows (a Glean agent gets 128K/run), reasoning vs. fast mode, evals, why models hallucinate.</li>
+        <li><strong>MCP, Custom Actions, APIs.</strong> Why you'd use one over the other. Webhooks, REST, OAuth basics.</li>
+        <li><strong>JSON literacy.</strong> Reading and editing configs.</li>
+        <li><strong>Reading code.</strong> You don't need to write Python from scratch; you do need to read it without flinching.</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <h4>Non-technical must-haves</h4>
+      <ul>
+        <li><strong>Customer discovery.</strong> Turn ambiguous pain into a shippable agent spec.</li>
+        <li><strong>Change management at enterprise scale.</strong> Champion frameworks, departmental rollouts.</li>
+        <li><strong>Writing.</strong> Briefings, runbooks, how-to guides customers actually use.</li>
+        <li><strong>Enablement delivery.</strong> Training 50-200 people without putting them to sleep.</li>
+        <li><strong>Executive presence.</strong></li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <h4>Personality filters</h4>
+      <p style="margin:0;font-size:15px;color:var(--ink-muted);">Hungry, curious, consultative. Candidates who "have something to show" because they built it for themselves, not for the interview. Low ego, high agency. Resilience with ambiguity. Candidates who drop off when asked to "build or present something" self-select below the bar.</p>
+    </div>
+  </div>
+
+  <h3>How you get there</h3>
+  <p>The whole guide is the answer. A summary:</p>
+  <ol>
+    <li><strong>Build in public.</strong> Every project: GitHub repo, 90-second Loom, LinkedIn post. Your visible work becomes the resume.</li>
+    <li><strong>Cold outreach is a working demo.</strong> Ship something on the target company's API. 90-second walkthrough. Send it with one specific question. Reply rate is 10x generic outreach.</li>
+    <li><strong>Pick a vertical and go deep.</strong> Domain expertise plus AI fluency is rarer than either alone.</li>
+    <li><strong>Write.</strong> A Substack with five posts of "here is what I built and what I learned" outperforms any polished resume.</li>
+    <li><strong>Skip the bootcamps.</strong> Reforge or Refonte only buys you a cohort you can replicate with a Discord server.</li>
+    <li><strong>Treat the job search itself as a project.</strong> Build an agent that finds roles, drafts tailored cover letters, tracks applications. Show it to your interviewers.</li>
+  </ol>
+
+  <h3>My own path</h3>
+  <p>Four years at Snowflake in finance and sales. No CS degree. In mid-2025 I started watching Karpathy videos, building agents with Claude, and talking to Max Comolli about the technical fundamentals. Landed at Glean as an AIOM in July 2025. Six months later I was building customer agents full time, writing internal how-to guides, running 160-person workshops, and shipping 20+ agents to enterprise accounts.</p>
+  <p>Ramp was about six months from zero to productive. I did nothing unusual. You can do a variation of this, starting today.</p>
+
+  <h3>What not to waste time on</h3>
+  <ul>
+    <li>Grinding LeetCode. Unless you're going for a research-engineer role at FAANG.</li>
+    <li>Certifications. Nobody cares.</li>
+    <li>Reading ten AI books before you ship anything. The books age faster than you read them.</li>
+    <li>Waiting to feel ready. You won't.</li>
+  </ul>
+</section>
+
+<!-- CLOSING -->
+<section class="closing">
+  <div class="chapter-eyebrow">The single piece of meta-advice</div>
+  <p class="closing-big">The gap between <em>one shipped</em> project and <em>zero</em> is wider than any credential in the industry right now.</p>
+  <p>Closing that gap is a weekend of work. So go.</p>
+
+  <div class="signoff">
+    <strong>Harry Toig</strong><br>
+    AI Outcomes Manager, Glean<br>
+    <a href="https://github.com/harrytoig/nicks-guide-to-ai" target="_blank" rel="noopener">github.com/harrytoig/nicks-guide-to-ai</a>
+  </div>
+</section>
+
+</main>
+
+<script>
+  // progress bar
+  const progress = document.getElementById('progress');
+  function updateProgress() {
+    const scrolled = window.scrollY;
+    const height = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = (scrolled / height) * 100;
+    progress.style.width = pct + '%';
+  }
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>
+
+</body>
+</html>
