@@ -1,9 +1,8 @@
-# Babel Fish
+# Fundamentals
 
-> *"The Babel fish is small, yellow, leech-like, and probably the oddest thing in the Universe... if you stick one in your ear, you can instantly understand anything said to you in any form of language."*
-> - Douglas Adams, *The Hitchhiker's Guide to the Galaxy*
+*How LLMs actually work, in three tiers.*
 
-LLMs are electric Babel fish. A handful of hours with the right people will take you from "this is magic" to "okay, I see how this works."
+A handful of hours with the right people will take you from "this is magic" to "okay, I see how this works."
 
 This chapter is three tiers. **Do Tier 1 your first week.** Tier 2 over the next month if you want real intuition. Tier 3 is for when you're ready to build things that matter.
 

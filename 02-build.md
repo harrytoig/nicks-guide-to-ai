@@ -1,11 +1,8 @@
-# Heart of Gold
+# Build
 
-> *"The ship hung in the sky in much the same way that bricks don't."*
-> - Douglas Adams
+*The most important chapter. Ten rungs, from weekend to ambitious.*
 
-The Heart of Gold is the ship in Hitchhiker's that runs on the Infinite Improbability Drive. It goes places that by any reasonable measure shouldn't be reachable. That is what you are trying to build: something that shouldn't quite work but does.
-
-This is the most important chapter in the guide. Theory is table stakes. Podcasts are background radiation. **Projects are the thing.**
+Theory is table stakes. Podcasts are background radiation. **Projects are the thing.**
 
 ---
 
@@ -87,7 +84,7 @@ Export 500 of your emails or journal entries. Fine-tune a small model (Gemma 3 2
 
 Custom slash commands. Hooks. MCPs for your own tools. Replace five manual workflows with agent workflows. This is the project AIOM and Forward Deployed Engineer interviewers actually want to see. You have internalized the primitives by living in them.
 
-**Teaches:** All of it. See [Marvin's Brain](./03-marvins-brain.md) for my setup.
+**Teaches:** All of it. See [Claude Code](./03-claude-code.md) for my setup.
 
 ---
 

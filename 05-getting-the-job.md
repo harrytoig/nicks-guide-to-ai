@@ -1,9 +1,8 @@
-# Hitch a Ride
+# Getting the Job
 
-> *"The art of flying lies in learning how to throw yourself at the ground and miss."*
-> - Douglas Adams
+*Which AI roles are actually gettable without a PhD, and how to land one.*
 
-You are not going to become an AI researcher at Anthropic this year without a PhD. Fine. The interesting news is that the most valuable roles in AI right now are not research roles. They are the people who stand between a research lab and a paying customer, and those jobs are aggressively gettable.
+You are not going to become an AI researcher at Anthropic this year without a PhD. Fine. The most valuable roles in AI right now are not research roles. They are the people who stand between a research lab and a paying customer, and those jobs are aggressively gettable.
 
 ---
 

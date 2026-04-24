@@ -1,9 +1,6 @@
-# Marvin's Brain
+# Claude Code
 
-> *"I've got this terrible pain in all the diodes down my left side."*
-> - Marvin, the Paranoid Android
-
-Marvin had a brain the size of a planet and spent most of it sulking. You can have that, too, running quietly in a terminal window on your laptop, and we can make yours more useful than his.
+*The daily-driver setup you should steal.*
 
 This is my Claude Code setup. Steal any of it. All of it.
 
@@ -133,11 +130,11 @@ Use Claude Code as your primary interface for a week. You won't want to go back.
 ## Where to Go Deeper
 
 - **Anthropic's Claude Code docs:** https://docs.claude.com/en/docs/claude-code/overview
-- **Boris Cherny on Lenny's Podcast**. Head of Claude Code on the product philosophy. See [Ear to the Ground](./04-ear-to-the-ground.md).
+- **Boris Cherny on Lenny's Podcast**. Head of Claude Code on the product philosophy. See [What to Follow](./04-what-to-follow.md).
 - **Anthropic's "Code w/ Claude" YouTube series**: the applied team walks through real workflows.
 
 ---
 
 ## One Warning
 
-Claude Code can do destructive things. Don't give it unsupervised access to production databases. Don't let it `rm -rf` blindly. Always confirm before a `git push`. Keep your towel nearby.
+Claude Code can do destructive things. Don't give it unsupervised access to production databases. Don't let it `rm -rf` blindly. Always confirm before a `git push`.
