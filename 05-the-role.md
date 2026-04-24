@@ -75,23 +75,6 @@ The whole guide is the answer. A summary:
 
 ---
 
-## My Own Path
-
-Four years at Snowflake in finance and sales. No CS degree. In mid-2025 I started watching Karpathy videos, building agents with Claude, and talking to Max Comolli about the technical fundamentals. I landed at Glean as an AIOM in July 2025. Six months later I was building customer agents full time, writing internal how-to guides, running 160-person workshops, and shipping 20+ agents to enterprise accounts.
-
-Ramp was about six months from zero to productive. I did nothing unusual. You can do a variation of this, starting today.
-
----
-
-## What Not to Waste Time On
-
-- Grinding LeetCode. Unless you're going for a research-engineer role at FAANG.
-- Certifications. Nobody cares.
-- Reading ten AI books before you ship anything. The books age faster than you read them.
-- Waiting to feel ready. You won't.
-
----
-
 ## The Single Piece of Meta-Advice
 
 The gap between "has shipped one real AI project" and "has shipped zero" is wider than any other credential in the industry right now. Closing that gap is a weekend of work. Go.

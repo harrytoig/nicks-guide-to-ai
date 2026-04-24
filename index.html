@@ -599,6 +599,7 @@
   <div class="topnav-inner">
     <div class="topnav-title">Nick's Guide to AI <span>· by Harry Toig</span></div>
     <div class="topnav-links">
+      <a href="#skills">Skills</a>
       <a href="#fundamentals">Fundamentals</a>
       <a href="#build">Build</a>
       <a href="#claude-code">Claude Code</a>
@@ -620,7 +621,7 @@
 <section class="intro">
   <p><strong>No prerequisites.</strong> No CS degree required. Four years ago I was in finance at Snowflake. Then I watched some YouTube videos, talked to a guy named Max Comolli, and started building. I am now an AI Outcomes Manager at Glean. The ladder is climbable.</p>
   <p class="pull">The thesis: learn AI by doing it. Not by reading about it. Not by grinding courses. Not by polishing your resume. Pay $20 a month for Claude, build five things, and be dangerous in six months.</p>
-  <p>This guide is structured around a specific end state: <strong>becoming an AIOM (AI Outcomes Manager)</strong> or any adjacent applied-AI role: Forward Deployed Engineer, Solutions Engineer, AI Product Manager, Customer Engineer. These roles exist between the people building frontier models and the customers trying to use them. They are the most gettable jobs in AI if you come from a non-technical background, and they are the ones that actually teach you the craft.</p>
+  <p>This guide targets a specific end state: <strong>AIOM</strong> (AI Outcomes Manager) or any adjacent applied-AI role: Forward Deployed Engineer, Solutions Engineer, AI Product Manager, Customer Engineer. These roles sit between the people building frontier models and the customers using them. They're the most gettable AI jobs for non-technical backgrounds.</p>
 
   <h3 style="margin-top:60px;">The North Star: AI Native</h3>
   <p>Glean's internal framework for AI fluency has three tiers. The hiring bar for AIOM is the top one.</p>
@@ -639,6 +640,39 @@
     </div>
   </div>
   <p>AI Native is not a credential. It is what you are after you have shipped enough things. You get there by building.</p>
+</section>
+
+<section class="intro" id="skills">
+  <h3>What You Need to Know</h3>
+  <p>If you read one section in this guide, read this. The specific skills the AIOM path requires. The chapters that follow are the curriculum.</p>
+  <div class="skills-grid">
+    <div class="skill-group">
+      <h4>Technical</h4>
+      <ul>
+        <li><strong>Prompting as craft.</strong> <em>Role → Task → Context → Reasoning → Output → Stop Condition.</em> Iteration, not one-shot.</li>
+        <li><strong>Agent design.</strong> Retrieval, grounding, guardrails, tool calling, multi-step flows.</li>
+        <li><strong>RAG fundamentals.</strong> Explain retrieval-augmented generation to a non-technical Sales Director in 90 seconds.</li>
+        <li><strong>LLM fundamentals.</strong> Context windows, reasoning vs. fast mode, evals, why models hallucinate.</li>
+        <li><strong>MCP, Custom Actions, APIs.</strong> When to use each. Webhooks, REST, OAuth basics.</li>
+        <li><strong>JSON literacy.</strong> Read and edit configs without flinching.</li>
+        <li><strong>Reading code.</strong> Not writing Python from scratch. Reading it when an agent you're debugging spits out a stack trace.</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <h4>Non-technical</h4>
+      <ul>
+        <li><strong>Customer discovery.</strong> Turn ambiguous pain into a shippable agent spec.</li>
+        <li><strong>Change management.</strong> Champion frameworks, departmental rollouts, adoption tracking.</li>
+        <li><strong>Writing.</strong> Briefings, runbooks, how-to guides customers actually use.</li>
+        <li><strong>Enablement delivery.</strong> Train 50-200 people without putting them to sleep.</li>
+        <li><strong>Executive presence.</strong> You'll brief CHROs, CTOs, and CEOs on their own AI strategy.</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <h4>Mindset</h4>
+      <p style="margin:0;font-size:15px;color:var(--ink-muted);">Hungry, curious, consultative. You build things for yourself, not for the interview. Low ego, high agency. Resilience with ambiguity. Candidates who drop off when asked to "build or present something" self-select below the bar.</p>
+    </div>
+  </div>
 </section>
 
 <section class="intro">
@@ -736,10 +770,9 @@
   <h2>Fundamentals</h2>
   <p class="chapter-subtitle">How LLMs work, what to learn first, and what to skip.</p>
 
-  <p>You do not need to understand attention math to be dangerous at this job. You do need a working mental model of what a language model is, what it can and can't do, and how the primitives (prompts, context, tools, agents) fit together. That's what this chapter buys you.</p>
+  <p>You don't need to understand attention math. You do need a working mental model: what an LLM is, what it can and can't do, how prompts, context, tools, and agents fit together. That's what this chapter buys.</p>
 
   <h3>Core (watch these, ~5-6 hours)</h3>
-  <p>The ones I'd watch first and the ones I re-watch.</p>
   <ol>
     <li><strong>Andrej Karpathy, <a href="https://www.youtube.com/watch?v=zjkBMFhNj_g" target="_blank" rel="noopener">Intro to Large Language Models</a></strong> (1 hr). The single best "what is an LLM" video ever made. Non-technical but substantive. Start here.</li>
     <li><strong>Andrej Karpathy, <a href="https://www.youtube.com/watch?v=LCEmiRjPEtQ" target="_blank" rel="noopener">Software Is Changing (Again)</a></strong> (40 min). The Software 1.0 → 2.0 → 3.0 framing. Essential mental model for where this is going.</li>
@@ -747,16 +780,16 @@
     <li><strong>Boris Cherny on Lenny's Podcast</strong> (~90 min). Head of Claude Code on product philosophy. Watch this before you try to use Claude Code seriously. Also find his <a href="https://www.latent.space/p/claude-code" target="_blank" rel="noopener">Latent Space appearance</a> for the technical version.</li>
   </ol>
 
-  <h3>Do (hands-on training, ~5 hours)</h3>
-  <p>Watching isn't enough. These are the tutorials you actually run.</p>
+  <h3>Do (hands-on, ~5 hours)</h3>
+  <p>Tutorials you actually run.</p>
   <ol>
     <li><strong><a href="https://github.com/anthropics/courses" target="_blank" rel="noopener">Anthropic's Prompt Engineering Interactive Tutorial</a></strong> (free, 9 chapters of Jupyter notebooks, ~4 hr). The best free prompt engineering course that exists. Do every exercise. This is the single highest-ROI thing on this page.</li>
     <li><strong><a href="https://www.youtube.com/watch?v=ysPbXH0LpIE" target="_blank" rel="noopener">Code w/ Claude: Prompting 101</a></strong> (Anthropic applied team, 45 min). Real production prompting patterns, not toy examples.</li>
     <li><strong>Read the Claude docs.</strong> Start with <a href="https://docs.claude.com/en/docs/build-with-claude/tool-use/overview" target="_blank" rel="noopener">Agents and Tool Use</a> and <a href="https://docs.claude.com/en/docs/agents-and-tools/mcp" target="_blank" rel="noopener">Model Context Protocol</a>. Skim them now, come back when you're stuck.</li>
   </ol>
 
-  <h3>Optional depth (for when the itch strikes)</h3>
-  <p>Not required for the AIOM path. Worth it if you're curious.</p>
+  <h3>Optional depth</h3>
+  <p>Not required. Worth it if curious.</p>
   <ul>
     <li><strong>Karpathy, <a href="https://www.youtube.com/watch?v=kCc8FmEb1nY" target="_blank" rel="noopener">Let's build GPT from scratch</a></strong> (2 hr). Codes GPT live. The highlight of his Zero to Hero series.</li>
     <li><strong>Karpathy, <a href="https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ" target="_blank" rel="noopener">Neural Networks: Zero to Hero</a></strong> (7 videos, ~15 hr). Builds neural nets from scratch: micrograd → makemore → nanoGPT. If you want internals, the best playlist ever made.</li>
@@ -765,7 +798,7 @@
   </ul>
 
   <h3>Skip</h3>
-  <p>Be ruthless about what you skip. The field moves fast enough that wrong-era resources cost you more than they teach.</p>
+  <p>Be ruthless. Wrong-era resources cost more than they teach.</p>
   <ul>
     <li><strong>LangChain courses.</strong> AIOMs work on agent platforms, not LangChain.</li>
     <li><strong>fast.ai Practical Deep Learning.</strong> Great course, wrong audience. It's for ML researchers, not AIOMs.</li>
@@ -787,7 +820,7 @@
   <p class="chapter-subtitle">Nine real projects, sorted so each one teaches something the next depends on.</p>
 
   <p>Theory is table stakes. Podcasts are background radiation. <strong>Projects are the thing.</strong></p>
-  <p>If you do nothing else in this guide, do this ladder. By rung 7 you can hold a coherent technical conversation with anyone hiring for an AIOM, Forward Deployed Engineer, Applied AI Engineer, Customer Engineer, or AI PM role.</p>
+  <p>If you do nothing else, do this ladder. By rung 7 you can hold your own in any applied-AI interview.</p>
 
   <div class="callout">
     <p><strong>The Rule.</strong> Ship every project publicly. GitHub repo + 90-second Loom + LinkedIn post. The artifacts ARE your portfolio. A resume with "interested in AI" is worth nothing. A GitHub profile with nine shipped AI projects is worth a job.</p>
@@ -914,8 +947,8 @@
   <h2>Claude Code</h2>
   <p class="chapter-subtitle">The daily-driver setup you should steal.</p>
 
-  <p>Claude Code is a command-line tool from Anthropic. You type plain English; it writes code, edits files, runs commands, and hands back results. It is better than ChatGPT for anything involving your actual filesystem: writing docs, editing code, automating workflows, building projects from zero.</p>
-  <p>It is the single biggest productivity unlock I have found in the last two years. I use it for customer work, my finances, health tracking, side projects, and most meaningful typing I do at a computer. Pay the $20 a month for Claude and use the hell out of it.</p>
+  <p>Claude Code is Anthropic's CLI. Type plain English; it writes code, edits files, runs commands, and hands back results. Better than ChatGPT for anything involving your actual filesystem: docs, code, automations, new projects from zero.</p>
+  <p>Single biggest productivity unlock I've found in two years. Pay the $20 a month for Claude and use the hell out of it.</p>
 
   <h3>Install</h3>
   <pre><code>npm install -g @anthropic-ai/claude-code</code></pre>
@@ -1044,9 +1077,7 @@
   <h2>The Role</h2>
   <p class="chapter-subtitle">What AIOMs actually do, and what skills you need to get there.</p>
 
-  <p>You are not going to become an AI researcher at Anthropic without a PhD. Fine. The most valuable roles in AI right now are not research roles. They are the people who stand between a research lab and a paying customer: <strong>Forward Deployed Engineers, Applied AI Engineers, Customer Engineers, AI Outcomes Managers</strong>. They build prototypes against real customer data, run enablement, turn ambiguous pain into shippable agents, and feed what they learn back into the product.</p>
-  <p>These roles are aggressively gettable if you come from a non-technical background. And they're the ones that actually teach you the craft.</p>
-
+  <p>You're not going to become an AI researcher at Anthropic without a PhD. Fine. The most valuable roles in AI right now are not research roles. They're the people between a research lab and a paying customer: <strong>Forward Deployed Engineers, Applied AI Engineers, Customer Engineers, AI Outcomes Managers</strong>. They build prototypes against real customer data, run enablement, turn ambiguous pain into shippable agents, and feed what they learn back into the product.</p>
   <h3>A typical AIOM week</h3>
   <p>A real week. Not polished. Representative.</p>
   <div class="week">
@@ -1057,36 +1088,6 @@
     <div class="week-day"><div class="week-day-label">Friday</div><div class="week-day-content">Ship a new Claude Code skill to automate part of your own job. Run a 160-person webinar on prompt engineering. Log everything.</div></div>
   </div>
   <p>You are a hybrid consultant / prompt engineer / product thinker. Scored on <strong>adoption</strong> (is the customer actually using it?) and <strong>power agents</strong> (are the agents still used weekly, months later?). Both metrics reward learn-by-doing. Neither rewards talk.</p>
-
-  <h3>The skills that matter</h3>
-  <div class="skills-grid">
-    <div class="skill-group">
-      <h4>Technical must-haves</h4>
-      <ul>
-        <li><strong>Prompting as craft.</strong> <em>Role → Task → Context → Reasoning → Output → Stop Condition.</em> Iteration, not one-shot.</li>
-        <li><strong>Agent design.</strong> Retrieval, grounding, guardrails, tool calling, multi-step flows.</li>
-        <li><strong>RAG fundamentals.</strong> Explain it to a non-technical Sales Director in 90 seconds.</li>
-        <li><strong>LLM fundamentals.</strong> Context windows (a Glean agent gets 128K/run), reasoning vs. fast mode, evals, why models hallucinate.</li>
-        <li><strong>MCP, Custom Actions, APIs.</strong> Why you'd use one over the other. Webhooks, REST, OAuth basics.</li>
-        <li><strong>JSON literacy.</strong> Reading and editing configs.</li>
-        <li><strong>Reading code.</strong> You don't need to write Python from scratch; you do need to read it without flinching.</li>
-      </ul>
-    </div>
-    <div class="skill-group">
-      <h4>Non-technical must-haves</h4>
-      <ul>
-        <li><strong>Customer discovery.</strong> Turn ambiguous pain into a shippable agent spec.</li>
-        <li><strong>Change management at enterprise scale.</strong> Champion frameworks, departmental rollouts.</li>
-        <li><strong>Writing.</strong> Briefings, runbooks, how-to guides customers actually use.</li>
-        <li><strong>Enablement delivery.</strong> Training 50-200 people without putting them to sleep.</li>
-        <li><strong>Executive presence.</strong></li>
-      </ul>
-    </div>
-    <div class="skill-group">
-      <h4>Personality filters</h4>
-      <p style="margin:0;font-size:15px;color:var(--ink-muted);">Hungry, curious, consultative. Candidates who "have something to show" because they built it for themselves, not for the interview. Low ego, high agency. Resilience with ambiguity. Candidates who drop off when asked to "build or present something" self-select below the bar.</p>
-    </div>
-  </div>
 
   <h3>How you get there</h3>
   <p>The whole guide is the answer. A summary:</p>
@@ -1099,17 +1100,6 @@
     <li><strong>Treat the job search itself as a project.</strong> Build an agent that finds roles, drafts tailored cover letters, tracks applications. Show it to your interviewers.</li>
   </ol>
 
-  <h3>My own path</h3>
-  <p>Four years at Snowflake in finance and sales. No CS degree. In mid-2025 I started watching Karpathy videos, building agents with Claude, and talking to Max Comolli about the technical fundamentals. Landed at Glean as an AIOM in July 2025. Six months later I was building customer agents full time, writing internal how-to guides, running 160-person workshops, and shipping 20+ agents to enterprise accounts.</p>
-  <p>Ramp was about six months from zero to productive. I did nothing unusual. You can do a variation of this, starting today.</p>
-
-  <h3>What not to waste time on</h3>
-  <ul>
-    <li>Grinding LeetCode. Unless you're going for a research-engineer role at FAANG.</li>
-    <li>Certifications. Nobody cares.</li>
-    <li>Reading ten AI books before you ship anything. The books age faster than you read them.</li>
-    <li>Waiting to feel ready. You won't.</li>
-  </ul>
 </section>
 
 <!-- CLOSING -->
