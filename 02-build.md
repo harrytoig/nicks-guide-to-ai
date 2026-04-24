@@ -1,90 +1,91 @@
 # Build
 
-*The most important chapter. Ten rungs, from weekend to ambitious.*
+*Nine real projects, sorted so each one teaches something the next depends on.*
 
-Theory is table stakes. Podcasts are background radiation. **Projects are the thing.**
+This is the most important chapter. Theory is table stakes. Podcasts are background radiation. **Projects are the thing.**
+
+If you do nothing else in this guide, do this ladder. By rung 7 you can hold a coherent technical conversation with anyone hiring for an AIOM, Forward Deployed Engineer, Applied AI Engineer, Customer Engineer, or AI PM role.
 
 ---
 
 ## The Rule
 
-Ship every project publicly. GitHub repo, 90-second Loom, LinkedIn post. The artifacts ARE your portfolio. A resume with "interested in AI" is worth nothing. A GitHub profile with ten shipped AI projects is worth a job.
+Ship every project publicly. GitHub repo, 90-second Loom, LinkedIn post. The artifacts ARE your portfolio. A resume with "interested in AI" is worth nothing. A GitHub profile with nine shipped AI projects is worth a job.
 
 ---
 
 ## The Ladder
 
-Ten rungs, zero-code to ambitious. Do at least five. If you do all ten, you are hireable.
-
 ### 1. Automate one annoying task with Claude Code
 **Difficulty 1. 2-4 hours.**
 
-Pick one friction point: inbox triage, meal planning from fridge photos, weekly calendar summary, logging your workouts. Install Claude Code, describe the task in plain English, iterate until it works.
+Pick one friction point you actually hate: inbox triage, meal planning from fridge photos, weekly calendar summary, workout logging, expense categorization. Install Claude Code, describe the task in plain English, iterate until it works.
 
-**Teaches:** How agents actually behave. Why context matters. Prompts as specifications.
+**Teaches:** how agents behave, why context matters, prompts as specifications. This is the easiest entry point and also a preview of how you'll spend your days as an AIOM.
 
-### 2. Chatbot with the Claude API
+### 2. Build a chatbot with the Claude API
 **Difficulty 1. One weekend.**
 
-Single-file Python script that hits the Claude API with a persona (your dad's voice, a future-self therapist, an investing buddy). [Anthropic quickstart](https://docs.claude.com/en/docs/get-started).
+Single-file Python script that hits the Claude API with a system prompt (a persona: your future-self therapist, an investing buddy, a writing coach). Use the [Anthropic quickstart](https://docs.claude.com/en/docs/get-started).
 
-**Teaches:** API calls, tokens, system vs. user messages.
+**Teaches:** API calls, tokens, system vs. user messages. Removes the abstraction so you see what's actually happening behind every agent builder.
 
-### 3. Automate a real workflow in n8n or Make.com
-**Difficulty 1. One weekend.**
-
-Pattern: new Gmail arrives, Claude classifies it, auto-label plus draft reply. Deploy on n8n's free tier. [n8n AI tutorial](https://docs.n8n.io/advanced-ai/intro-tutorial/).
-
-**Teaches:** Plumbing, webhooks, and why 80% of so-called "AI products" are really workflows.
-
-### 4. RAG over your own notes
+### 3. RAG over your own notes
 **Difficulty 2. One weekend.**
 
-Start easy: drag your journal or Obsidian vault into Claude Projects, chat with it. Then rebuild from scratch with LlamaIndex or the [Anthropic RAG cookbook](https://platform.claude.com/cookbook/capabilities-retrieval-augmented-generation-guide).
+Start easy: drag your journal, Notion export, or Obsidian vault into Claude Projects and chat with it. Then rebuild from scratch with LlamaIndex or the [Anthropic RAG cookbook](https://platform.claude.com/cookbook/capabilities-retrieval-augmented-generation-guide).
 
-**Teaches:** Embeddings, chunking, and why retrieval quality is the whole ballgame.
+**Teaches:** embeddings, chunking, and the truth that retrieval quality is the whole ballgame. You need to be able to explain RAG to a non-technical stakeholder in 90 seconds. Build one, and you can.
 
-### 5. Tool-use agent that does something real
+### 4. Build a tool-use agent
 **Difficulty 2. One week.**
 
-Claude with the tool-use API. A bot that reads your calendar, checks the weather, and texts you a day plan. Or a finance agent that reads Plaid transactions and yells at you about your grocery bill.
+Claude with the tool_use API. A bot that reads your calendar, checks the weather, and texts you a day plan. Or a finance agent that reads Plaid transactions and yells at you about your grocery bill.
 
-**Teaches:** Function calling, agent loops, and why agents fail (ambiguous tools, bad state handling).
+**Teaches:** function calling, agent loops, and (most importantly) why agents fail. Ambiguous tools, bad state handling, retry strategies, and when to have the agent ask a human. This is the meat of the AIOM job.
 
-### 6. Deploy a public chatbot with Vercel AI SDK
+### 5. Install MCP servers and write a custom one
+**Difficulty 2. A few hours.**
+
+Install two or three MCP servers in Claude Desktop: Gmail, Google Calendar, Plaid, GitHub. Then write a tiny custom MCP server using [Anthropic's Python template](https://modelcontextprotocol.io/quickstart/server). Fifty lines. Point Claude at something weird in your life (your Oura data, your Spotify history, whatever).
+
+**Teaches:** what MCP actually is and why it's the direction the industry is going. Every serious AI tool is gaining MCP support in 2026. Understanding this primitive is table stakes now and will be a floor in six months.
+
+### 6. Build an agent on a no-code platform
+**Difficulty 1. 2-4 hours.**
+
+Glean Agent Builder if you're at a Glean customer. Otherwise: [Dify](https://dify.ai/), [Flowise](https://flowiseai.com/), [LangFlow](https://langflow.org/), or n8n's AI nodes. Build a three-step agent with retrieval, an LLM step, and a tool call.
+
+**Teaches:** what "building an agent" looks like when the platform abstracts the API. This is exactly what AIOMs do with customers all day. If you can ship one thing on a no-code platform, you can walk into any AIOM interview.
+
+### 7. Write a simple eval for one of your agents
+**Difficulty 3. Half a day.**
+
+Pick an agent you already built. Write 10-20 test cases with expected outputs. Run them. Score pass/fail. Then change one thing in the prompt and score again.
+
+**Teaches:** you cannot ship what you cannot measure. This is the skill that separates hobbyists from people who get hired. Glean's AIOM technical interview explicitly probes this. See Anthropic's [evaluation framework guide](https://docs.claude.com/en/docs/test-and-evaluate/define-success) for patterns.
+
+### 8. Deploy a public chatbot with the Vercel AI SDK
 **Difficulty 2. One weekend.**
 
-Clone [vercel/chatbot](https://github.com/vercel/chatbot), customize it, deploy to a public URL. Get 10 friends to use it.
+Clone [vercel/chatbot](https://github.com/vercel/chatbot), customize, deploy to a public URL. Get 10 friends to use it. Watch the logs. Notice what breaks.
 
-**Teaches:** Streaming, React hooks, and (crucially) shipping to real users. The gap most tutorials skip.
+**Teaches:** streaming, React hooks, and (crucially) shipping to real users. The gap most tutorials skip. Your first "users" experience is worth more than any tutorial.
 
-### 7. Voice app with Whisper + Claude + ElevenLabs
-**Difficulty 3. One week.**
-
-Record, transcribe, reason, speak. Build a voice journal that responds to you.
-
-**Teaches:** Multi-model pipelines, latency tradeoffs, and the UX problems of voice.
-
-### 8. Karpathy's makemore and nanoGPT
-**Difficulty 4. One to two weeks.**
-
-Watch [Neural Networks: Zero to Hero](https://karpathy.ai/zero-to-hero.html). Code along, don't just watch. Train a character-level model on your own texts.
-
-**Teaches:** What is actually inside the box. Non-negotiable if you want to credibly talk to engineers.
-
-### 9. Fine-tune a small model in your voice
-**Difficulty 3. One week.**
-
-Export 500 of your emails or journal entries. Fine-tune a small model (Gemma 3 270M, Phi-3 Mini) with [Hugging Face's TRL](https://huggingface.co/blog/dvgodoy/fine-tuning-llm-hugging-face). Runs on Colab's free tier.
-
-**Teaches:** Data quality beats model size. When fine-tuning beats prompting.
-
-### 10. Make Claude Code your daily driver
+### 9. Make Claude Code your daily driver
 **Difficulty 3. Ongoing.**
 
-Custom slash commands. Hooks. MCPs for your own tools. Replace five manual workflows with agent workflows. This is the project AIOM and Forward Deployed Engineer interviewers actually want to see. You have internalized the primitives by living in them.
+Custom slash commands. Rules files. Skills. MCPs for your own tools. Replace five manual workflows with Claude-Code-driven ones. Commit your setup to a repo.
 
-**Teaches:** All of it. See [Claude Code](./03-claude-code.md) for my setup.
+**Teaches:** all of it. This is the project AIOM interviewers actually want to see. When you've internalized the primitives by living in them for 30 days, it shows. See [Claude Code](./03-claude-code.md) for the setup.
+
+---
+
+## Optional Depth (for the curious, not AIOM-core)
+
+- **Karpathy's makemore + nanoGPT** (Difficulty 4, 1-2 weeks). Watch [Zero to Hero](https://karpathy.ai/zero-to-hero.html). Code along. Train a character-level model on your own writing. Non-negotiable if you're going for a research-adjacent role. Credibility-bank if you want engineers to take you seriously in AIOM interviews.
+- **Fine-tune a small model** (Difficulty 3, one week). Export 500 of your emails. Fine-tune Gemma 3 or Phi-3 with [Hugging Face TRL](https://huggingface.co/blog/dvgodoy/fine-tuning-llm-hugging-face). Runs on Colab free tier. Teaches data quality beats model size.
+- **Voice app: Whisper + Claude + ElevenLabs** (Difficulty 3, one week). Record, transcribe, reason, speak. A voice journal. Teaches multi-model pipelines.
 
 ---
 
@@ -95,6 +96,7 @@ Custom slash commands. Hooks. MCPs for your own tools. Replace five manual workf
 - Personal health tracker that ingests Oura data, lab results, and meal photos.
 - Slack bot that reads your team's channels and drafts a weekly digest.
 - GitHub-reading agent that writes a proper README for any repo you point it at.
+- Agent that watches your Gong / Granola transcripts and drafts follow-up emails.
 
 If the idea excites you and there's a small unknown in the middle, it's the right project.
 
@@ -102,7 +104,7 @@ If the idea excites you and there's a small unknown in the middle, it's the righ
 
 ## One Rule Before You Start
 
-Pick the smallest version you can actually finish this week. **Shipped and ugly beats unshipped and beautiful.** You will learn 10x more from one deployed project than from three half-built ones. Set a 72-hour timer and go.
+Pick the smallest version you can actually finish this week. **Shipped and ugly beats unshipped and beautiful.** You learn 10x more from one deployed project than from three half-built ones. Set a 72-hour timer and go.
 
 ---
 
@@ -111,6 +113,6 @@ Pick the smallest version you can actually finish this week. **Shipped and ugly 
 1. Push to GitHub with a README that explains what it does, why, and what broke.
 2. Record a 90-second Loom demo.
 3. Post on LinkedIn: what you built, what you were trying to learn, what surprised you.
-4. Tweet it at Simon Willison or Ethan Mollick. They actually reply to people shipping good work.
+4. Tweet it. Ethan Mollick, Simon Willison, and Alex Albert actually reply to people shipping good work. So does most of AI Twitter. Ship and they'll find you.
 
 You are not trying to build the next ChatGPT. You are trying to prove to yourself and to future employers that you can ship. Both goals are served by getting one ugly thing out the door this week.

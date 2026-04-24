@@ -46,18 +46,18 @@ Pick 2 podcasts, 2 newsletters, and a dozen X follows. Consistency beats breadth
 
 The dozen I actually follow (plus two official accounts):
 
-- **[@karpathy](https://x.com/karpathy)** — teaches more in a thread than most courses.
-- **[@simonw](https://x.com/simonw)** — live-tweets every model release with tests.
-- **[@dwarkesh_sp](https://x.com/dwarkesh_sp)** — podcast clips and takes.
-- **[@DarioAmodei](https://x.com/DarioAmodei)** — Anthropic CEO, rare but signal-heavy.
-- **[@sama](https://x.com/sama)** — OpenAI CEO. Watch the vibes, not the words.
-- **[@nlw](https://x.com/nlw)** — Nathaniel Whittemore, AI Daily Brief host.
-- **[@swyx](https://x.com/swyx)** — Latent Space, builder scene pulse.
-- **[@AlexAlbert__](https://x.com/AlexAlbert__)** — Alex Albert at Anthropic, prompt craft and Claude tips.
-- **[@jackclarkSF](https://x.com/jackclarkSF)** — Jack Clark at Anthropic, policy and capability reasoning.
-- **[@benthompson](https://x.com/benthompson)** — Stratechery.
-- **[@rileybrown](https://x.com/rileybrown)** — vibe coder, practical AI user.
-- **[@alexfinn](https://x.com/alexfinn)** — vibe coder, practical AI user.
+- **[@karpathy](https://x.com/karpathy)**: teaches more in a thread than most courses.
+- **[@simonw](https://x.com/simonw)**: live-tweets every model release with tests.
+- **[@dwarkesh_sp](https://x.com/dwarkesh_sp)**: podcast clips and takes.
+- **[@DarioAmodei](https://x.com/DarioAmodei)**: Anthropic CEO, rare but signal-heavy.
+- **[@sama](https://x.com/sama)**: OpenAI CEO. Watch the vibes, not the words.
+- **[@nlw](https://x.com/nlw)**: Nathaniel Whittemore, AI Daily Brief host.
+- **[@swyx](https://x.com/swyx)**: Latent Space, builder scene pulse.
+- **[@AlexAlbert__](https://x.com/AlexAlbert__)**: Alex Albert at Anthropic, prompt craft and Claude tips.
+- **[@jackclarkSF](https://x.com/jackclarkSF)**: Jack Clark at Anthropic, policy and capability reasoning.
+- **[@benthompson](https://x.com/benthompson)**: Stratechery.
+- **[@rileybrown](https://x.com/rileybrown)**: vibe coder, practical AI user.
+- **[@alexfinn](https://x.com/alexfinn)**: vibe coder, practical AI user.
 
 Plus **[@AnthropicAI](https://x.com/AnthropicAI)** and **[@OpenAI](https://x.com/OpenAI)** for official announcements.
 

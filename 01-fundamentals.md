@@ -1,72 +1,60 @@
 # Fundamentals
 
-*How LLMs actually work, in three tiers.*
+*How LLMs work, what to learn first, and what to skip.*
 
-A handful of hours with the right people will take you from "this is magic" to "okay, I see how this works."
-
-This chapter is three tiers. **Do Tier 1 your first week.** Tier 2 over the next month if you want real intuition. Tier 3 is for when you're ready to build things that matter.
+You do not need to understand attention math to be dangerous at this job. You do need a working mental model of what a language model is, what it can and can't do, and how the primitives (prompts, context, tools, agents) fit together. That's what this chapter buys you.
 
 ---
 
-## Tier 1: Start Here (~4 hours)
+## Core (watch these, ~5-6 hours)
 
-Five pieces. Watch them in order. This is the minimum viable education.
+These are the ones I'd watch first and the ones I re-watch.
 
-1. **[Intro to Large Language Models](https://www.youtube.com/watch?v=zjkBMFhNj_g)**. Andrej Karpathy, 1 hour. The single best "what is an LLM" video ever made. Non-technical but substantive. Start here.
-2. **[But what is a GPT? Visual intro to Transformers](https://www.youtube.com/watch?v=wjZofJX0v4M)**. 3Blue1Brown, ~27 min. Animated visualization of what's happening inside GPT. Zero code.
-3. **[Attention in transformers, visually explained](https://www.youtube.com/watch?v=eMlx5fFNoYc)**. 3Blue1Brown, ~26 min. The clearest explanation of attention that exists. Watch right after #2.
-4. **[Software Is Changing (Again)](https://www.youtube.com/watch?v=LCEmiRjPEtQ)**. Karpathy at YC AI Startup School, ~40 min. The "Software 1.0 → 2.0 → 3.0" framing. Essential mental model.
-5. **[Dario Amodei on Lex Fridman](https://www.youtube.com/watch?v=ugvHCXCOmm4)**. ~5 hrs, skim. Anthropic's CEO on scaling, safety, and timelines. The Chris Olah interpretability segment is the highlight.
-
-After Tier 1 you should be able to explain to a normal human: what a token is, the difference between pretraining and fine-tuning, and why "attention" matters. If you can't, rewatch #1.
+1. **Andrej Karpathy, [Intro to Large Language Models](https://www.youtube.com/watch?v=zjkBMFhNj_g)** (1 hr). The single best "what is an LLM" video ever made. Non-technical but substantive. Start here.
+2. **Andrej Karpathy, [Software Is Changing (Again)](https://www.youtube.com/watch?v=LCEmiRjPEtQ)** (40 min). The Software 1.0 → 2.0 → 3.0 framing. Essential mental model for where this is going.
+3. **Andrej Karpathy, "Deep Dive into LLMs like ChatGPT"** (3.5 hr, Feb 2025). The full stack: pretraining, fine-tuning, RLHF, why hallucinations happen. Find it on [his YouTube channel](https://www.youtube.com/@AndrejKarpathy).
+4. **Boris Cherny on Lenny's Podcast** (~90 min). Head of Claude Code on product philosophy. Watch this before you try to use Claude Code seriously. Also find his [Latent Space appearance](https://www.latent.space/p/claude-code) for the technical version.
 
 ---
 
-## Tier 2: Go Deeper (~15-20 hours)
+## Do (hands-on training, ~5 hours)
 
-This is where you build actual intuition for how these things work.
+Watching isn't enough. These are the tutorials you actually run.
 
-- **"Deep Dive into LLMs like ChatGPT"**. Karpathy, 3.5 hours (Feb 2025). The full stack: pretraining, fine-tuning, RLHF, why hallucinations happen. Search his [YouTube channel](https://www.youtube.com/@AndrejKarpathy). Watch in one sitting with coffee.
-- **[Neural Networks: Zero to Hero](https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ)**. Karpathy, 7 videos, ~15 hours. Build neural nets from scratch: micrograd → makemore → nanoGPT. If I had to pick one playlist for the next decade, this is it.
-- **[Let's build GPT, from scratch, in code, spelled out](https://www.youtube.com/watch?v=kCc8FmEb1nY)**. Karpathy, ~2 hours. If you only watch one Zero to Hero video, this is the one.
-- **Karpathy x Dwarkesh Patel (Oct 2025)**. ~2.5 hours. "AGI is a decade away." The most honest conversation about AI capability limits right now. Find it on the [Dwarkesh Podcast](https://www.dwarkesh.com/podcast).
-- **3Blue1Brown's Deep Learning Playlist (Chapters 1-4)**. ~2 hours. Watch before Zero to Hero if the math feels shaky.
+1. **[Anthropic's Prompt Engineering Interactive Tutorial](https://github.com/anthropics/courses)** (free, 9 chapters of Jupyter notebooks, ~4 hr). The best free prompt engineering course that exists. Do every exercise. This is the single highest ROI thing on this page.
+2. **[Code w/ Claude: Prompting 101](https://www.youtube.com/watch?v=ysPbXH0LpIE)** (Anthropic applied team, 45 min). Real production prompting patterns, not toy examples.
+3. **Read the Claude docs.** Start with [Agents and Tool Use](https://docs.claude.com/en/docs/build-with-claude/tool-use/overview) and [Model Context Protocol](https://docs.claude.com/en/docs/agents-and-tools/mcp). Skim them now, come back when you're stuck.
 
 ---
 
-## Tier 3: If You Want to Build
+## Optional Depth (for when the itch strikes)
 
-Hands-on. Do the exercises, don't just watch.
+Not required for the AIOM path. Worth it if you're curious.
 
-- **[Anthropic's Prompt Engineering Interactive Tutorial](https://github.com/anthropics/courses)**. Free. 9 chapters of Jupyter notebooks. Best free prompt engineering course that exists. Do every exercise.
-- **[ChatGPT Prompt Engineering for Developers](https://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/)**. Andrew Ng and Isa Fulford, ~1.5 hours, free. Minimal Python needed.
-- **[LangChain for LLM Application Development](https://www.deeplearning.ai/short-courses/langchain-for-llm-application-development/)**. Harrison Chase + Ng, ~1 hour. Chains, memory, agents, RAG basics.
-- **[Building Systems with the ChatGPT API](https://www.deeplearning.ai/short-courses/building-systems-with-chatgpt/)**. Ng and Fulford, ~1 hour. Multi-step LLM pipelines with moderation and evals.
-- **[Practical Deep Learning for Coders](https://course.fast.ai/)**. Jeremy Howard, fast.ai. ~30 hours. Build-first pedagogy: you train a real model in lesson one and learn the theory after.
-- **[Hugging Face LLM Course](https://huggingface.co/learn/llm-course)**. Free. Transformers, tokenizers, fine-tuning, deployment. The practitioner standard.
-- **[Code w/ Claude: Prompting 101](https://www.youtube.com/watch?v=ysPbXH0LpIE)**. Anthropic applied-AI team, ~45 min. Real production prompting patterns.
-- **Boris Cherny on Lenny's Podcast**. Head of Claude Code on what happens after coding is solved. Search "Boris Cherny Lenny's." Also find his Latent Space appearance.
-- **[Simon Willison's "Things we learned about LLMs" talks](https://simonwillison.net/tags/my-talks/)**. The best running commentary on LLMs as a working tool.
+- **Karpathy, [Let's build GPT from scratch](https://www.youtube.com/watch?v=kCc8FmEb1nY)** (2 hr). Codes GPT live. The highlight of his Zero to Hero series.
+- **Karpathy, [Neural Networks: Zero to Hero](https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ)** (7 videos, ~15 hr). Builds neural nets from scratch: micrograd → makemore → nanoGPT. If you want internals, this is the best playlist ever made.
+- **3Blue1Brown, [But what is a GPT?](https://www.youtube.com/watch?v=wjZofJX0v4M)** and [Attention in transformers](https://www.youtube.com/watch?v=eMlx5fFNoYc) (~50 min together). Animated visual explainers of what's happening inside a transformer. The best "I'm not a math person but I want intuition" resource. Only pick these up if the architecture is nagging at you.
+- **[Simon Willison's talks](https://simonwillison.net/tags/my-talks/)**. Running commentary on LLMs as a working tool. Watch his latest.
 
 ---
 
-## Suggested Path
+## Skip
 
-- **Weekend 1:** Tier 1 in one sitting. 4 hours and a coffee.
-- **Weeks 2-6:** Zero to Hero + Anthropic's Prompt Engineering tutorial in parallel. Two to three hours per weekend.
-- **Month 3+:** fast.ai or Hugging Face, depending on whether you want to be a builder or a researcher.
+Be ruthless about what you skip. The field moves fast enough that wrong-era resources cost you more than they teach.
 
----
-
-## Skip for Now
-
-- **Two Minute Papers**: good energy, thin substance.
-- **Yannic Kilcher**: brilliant but assumes you read papers.
-- **99% of "10x your productivity with AI" YouTube videos**: vibes, not information.
-- **Anything from pre-2023 on practical LLMs**: the field has moved twice since.
+- **LangChain courses.** AIOMs work on agent platforms (Glean, Dify, n8n, direct API). LangChain is a framework more than a mental model, and you won't use it day-to-day.
+- **fast.ai Practical Deep Learning.** Great course, wrong audience. It's for people who want to be ML researchers or engineers, not AIOMs.
+- **Hugging Face LLM Course.** Fine-tuning and deployment aren't AIOM-core. Come back here if you end up at an AI-native lab.
+- **Lex Fridman AI episodes, mostly.** Occasional gems (Karpathy, Dario, Hassabis) but five-hour interviews are inefficient when Karpathy has a 1-hour explainer.
+- **Anything from pre-2023 on practical LLMs.** The field has moved twice since. Theory (attention, transformers, training dynamics) ages well. Practical takes expire in 18 months.
 
 ---
 
-## One Meta-Note
+## The Four-Week Path
 
-Theory (attention, transformers, training dynamics) ages well. Practical takes (which model is best, which tool to use) expire in 18 months. Calibrate your trust in a video by its release date. If you're watching something from 2022 about what Claude can do, you're reading yesterday's newspaper.
+- **Week 1.** Karpathy's Intro to LLMs + Software Is Changing + Anthropic's Prompt Engineering Tutorial (first 3 chapters). ~6 hrs.
+- **Week 2.** Finish Anthropic Prompt Engineering + Code w/ Claude: Prompting 101 + read Claude Agents/Tool Use docs. ~5 hrs.
+- **Week 3.** Karpathy's Deep Dive into LLMs like ChatGPT + Boris Cherny on Lenny's. ~5 hrs.
+- **Week 4.** Start building. See [Build](./02-build.md). By now you know enough to be dangerous. The rest is reps.
+
+You do not need to finish every video before you start building. In fact, you learn faster by building halfway through. The "do" section matters more than the "watch" section.

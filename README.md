@@ -4,7 +4,9 @@
 
 **The thesis: learn AI by doing it.** Not by reading about it. Not by grinding courses. Not by polishing your resume. Pay $20 a month for Claude, build five things, and be dangerous in six months.
 
-This guide is structured around a specific end state: **becoming an AIOM** (AI Outcomes Manager) or any adjacent applied-AI role — Forward Deployed Engineer, Solutions Engineer, AI Product Manager, Customer Engineer. These roles exist between the people building frontier models and the customers trying to use them. They're the most gettable jobs in AI if you come from a non-technical background, and they're the ones that actually teach you the craft.
+This guide is structured around a specific end state: **becoming an AIOM** (AI Outcomes Manager) or any adjacent applied-AI role: Forward Deployed Engineer, Solutions Engineer, AI Product Manager, Customer Engineer. These roles exist between the people building frontier models and the customers trying to use them. They're the most gettable jobs in AI if you come from a non-technical background, and they're the ones that actually teach you the craft.
+
+Glean's internal framework for AI fluency has three tiers: **AI Literate** (can use ChatGPT), **AI Proficient** (has built agents), **AI Native** (builds habitually, architects from scratch). The hiring bar for these roles is the top tier. You get there by building, not reading. Everything below is the path.
 
 ---
 
@@ -26,7 +28,7 @@ If you are short on time, start with #3. You can reverse-engineer the other two 
 2. [**Build**](./02-build.md). A ladder of projects to ship, from weekend to ambitious.
 3. [**Claude Code**](./03-claude-code.md). The daily-driver setup you should steal.
 4. [**What to Follow**](./04-what-to-follow.md). Podcasts, blogs, and X accounts worth your time.
-5. [**Getting the Job**](./05-getting-the-job.md). Which AI roles are actually gettable, and how to get one.
+5. [**The Role**](./05-the-role.md). What AIOMs actually do, and what skills get you there.
 
 ---
 
