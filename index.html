@@ -619,6 +619,10 @@
     .x-item { padding: 7pt 9pt; font-size: 9pt; }
     .x-item a { font-size: 10pt; }
     .x-item .x-desc { font-size: 8pt; }
+    .reference-table { page-break-inside: avoid; break-inside: avoid; }
+    .reference-table table { font-size: 9pt; }
+    .reference-table th { font-size: 8.5pt; padding: 5pt 7pt; }
+    .reference-table td { padding: 5pt 7pt; }
     .week-day { padding: 8pt 0; grid-template-columns: 80pt 1fr; gap: 16pt; }
     .week-day-label { font-size: 8pt; }
     .week-day-content { font-size: 9.5pt; }
@@ -631,6 +635,40 @@
     .callout, .first-hour, .skill-group, .x-item { background: #f4efe2 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     .tier.target { background: #ede7ff !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   }
+
+  /* reference table */
+  .reference-table {
+    margin: 24px 0;
+    overflow-x: auto;
+  }
+  .reference-table table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  .reference-table th {
+    text-align: left;
+    padding: 10px 14px;
+    background: var(--paper-deep);
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-muted);
+    border-bottom: 1px solid var(--rule);
+  }
+  .reference-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+  }
+  .reference-table td:first-child {
+    font-weight: 500;
+    white-space: nowrap;
+    padding-right: 24px;
+  }
+  .reference-table tr:last-child td { border-bottom: none; }
 
   /* keyboard hint */
   .keyboard-hint {
@@ -1028,48 +1066,321 @@
 
 <!-- CHAPTER 03 -->
 <section class="chapter" id="claude-code">
-  <div class="chapter-eyebrow">Chapter 03</div>
+  <div class="chapter-eyebrow">Chapter 03 · The full setup walkthrough</div>
   <h2>Claude Code</h2>
-  <p class="chapter-subtitle">The daily-driver setup you should steal.</p>
+  <p class="chapter-subtitle">Build your AI agent. A persistent brain Claude can read, write to, and auto-sync to GitHub.</p>
 
-  <p>Claude Code is Anthropic's CLI. Type plain English; it writes code, edits files, runs commands, and hands back results. Better than ChatGPT for anything involving your actual filesystem: docs, code, automations, new projects from zero.</p>
-  <p>Single biggest productivity unlock I've found in two years. Pay the $20 a month for Claude and use the hell out of it.</p>
+  <p>Claude Code is Anthropic's CLI. Type plain English and it writes code, edits files, runs commands, and hands back results. Better than ChatGPT for anything touching your actual filesystem. Single biggest productivity unlock I've found in two years.</p>
+  <p>This chapter is a full practical walkthrough of the setup I actually run. By the end you'll have a <code>~/brain/</code> repo that Claude reads on every session, auto-synced to GitHub every 10 minutes, with skills and rules that make it yours.</p>
 
-  <h3>Install</h3>
-  <pre><code>npm install -g @anthropic-ai/claude-code</code></pre>
-  <p>You need Node.js. If you don't have it, <code>brew install node</code>. If you don't have Homebrew, install it first.</p>
-  <p>Then <code>cd</code> to a folder and type <code>claude</code>. That is it.</p>
+  <h3>What You're Building</h3>
+  <pre><code>~/brain/                    # Your private GitHub repo (source of truth)
+  CLAUDE.md                 # Who you are, how Claude should work with you
+  todos.md                  # Running task list Claude can read and update
+  memory/                   # Claude's self-improving notes
+    MEMORY.md               # Index file (auto-loaded every session)
+    tool-lessons.md         # What went wrong, how to fix it
+    preferences.md          # Your feedback on Claude's output
+  work/                     # Your work context (customers, projects, notes)
+  skills/                   # Reusable workflows Claude can execute
+  commands/                 # Quick-fire templates
+  scripts/
+    auto-sync.sh            # Cron job: commits and pushes every 10 min
+    setup-claude.sh         # One-time wiring script
+  .github/workflows/        # Recurring automations (digests, health reports)</code></pre>
+  <p><strong>The key insight:</strong> Claude Code reads <code>~/CLAUDE.md</code> and <code>~/.claude/</code> on every session start. Symlink those to a Git repo and your AI agent has persistent memory across sessions and machines.</p>
 
-  <h3>The six things worth configuring</h3>
-  <p>Ignore all of this for your first week. Just start using Claude Code on real tasks. When it gets frustrating in the same way twice, come back here.</p>
+  <h3>Step 1: Get Claude Code Running</h3>
+  <h4>Install</h4>
+  <pre><code># Via npm (requires Node.js 18+)
+npm install -g @anthropic-ai/claude-code
 
-  <h4>1. CLAUDE.md</h4>
-  <p>A <code>CLAUDE.md</code> file at the root of any project gets read every session. Use it to tell Claude who you are, how to talk to you, what tools to prefer, and what to avoid. Put one at <code>~/CLAUDE.md</code> so Claude knows you across every project.</p>
-
-  <h4>2. Rules files</h4>
-  <p>For longer preferences, split into <code>~/.claude/rules/*.md</code>, one file per topic. Mine: personal-context, tool-routing, parallel-execution, memory-and-persistence, reminders. They auto-load every session.</p>
-
-  <h4>3. Slash commands</h4>
-  <p>A slash command is a reusable prompt you invoke with <code>/name</code>. Drop a markdown file into <code>~/.claude/commands/</code>. Good ones to build: <code>/morning</code>, <code>/evening</code>, <code>/standup</code>, <code>/brief [customer]</code>, <code>/log</code>. If you use the same prompt three times, make it a command.</p>
-
-  <h4>4. Skills</h4>
-  <p>Skills are commands' more structured cousin. Multi-step, can spawn sub-agents, can ship with their own domain knowledge. If a command gets longer than 30 lines or needs sub-steps, promote it to a skill.</p>
-
-  <h4>5. MCPs (Model Context Protocols)</h4>
-  <p>Plug-in tool servers that let Claude talk to external services. Install early: Google Calendar / Gmail MCP, Granola MCP for meetings, Plaid MCP for finance, Glean MCP for work knowledge, Computer Use MCP for desktop control. This is where the rabbit hole begins.</p>
-
-  <h4>6. Memory</h4>
-  <p>Claude Code writes auto-memory notes to <code>~/.claude/projects/[project]/memory/</code> across sessions. It remembers preferences, corrections, tool mistakes. You can prompt directly: "remember that I prefer X over Y." Pattern: <code>MEMORY.md</code> as an index under 200 lines, topic files for tool-lessons, preferences, debugging.</p>
-
-  <h3>First week</h3>
+# Or Homebrew
+brew install claude-code</code></pre>
+  <h4>Subscribe</h4>
   <ul>
-    <li>Ask Claude to read your entire Downloads folder and categorize what's in it.</li>
-    <li>Summarize your last 30 days of journal entries. Find out what you're obsessing over.</li>
-    <li>Build a one-page website from a rough description and deploy to Vercel.</li>
-    <li>Write a slash command for your morning routine: calendar check, top news, day plan.</li>
-    <li>Point it at an annoying manual process you do weekly and have it write the bash script.</li>
+    <li><strong>Claude Pro</strong> ($20/mo): limited usage.</li>
+    <li><strong>Claude Max 5x</strong> ($100/mo): recommended. Plenty of headroom.</li>
+    <li><strong>Claude Max 20x</strong> ($200/mo): heavy usage.</li>
   </ul>
-  <p>Use Claude Code as your primary interface for a week. You won't want to go back.</p>
+  <h4>First run</h4>
+  <pre><code>cd ~
+claude
+# Walks you through authentication</code></pre>
+
+  <h3>Step 2: Create Your Brain Repo</h3>
+  <h4>Initialize</h4>
+  <pre><code>mkdir ~/brain &amp;&amp; cd ~/brain
+git init
+mkdir -p memory work skills commands scripts notes reference .github/workflows</code></pre>
+  <h4>Create your CLAUDE.md</h4>
+  <p>The most important file. It tells Claude who you are and how to work with you. Drop this at <code>~/brain/CLAUDE.md</code> and customize:</p>
+  <pre><code># [Your Name]
+
+## Communication
+- [Tone: concise, detailed, casual, formal]
+- [Rules: no jargon, no emojis, no em dashes, etc.]
+- [Push back when warranted? Or always agree?]
+
+## Work
+- [Your role, company, team]
+- [What you're working on right now]
+- [Work email vs personal email]
+
+## File System
+- **Brain is source of truth.** Write to `~/brain/` first.
+- Todos: `~/brain/todos.md`
+- Memory: `~/brain/memory/`
+- Work context: `~/brain/work/`
+- Save generated files to `~/Downloads`
+
+## Session Rules
+- Read relevant context files before starting work on a topic
+- Update todos.md when new tasks come up
+- Update memory files when you learn something about tools or preferences
+- Ask on ambiguous requests. Act on clear tasks.</code></pre>
+  <h4>Seed the memory files</h4>
+  <pre><code>cat &gt; ~/brain/memory/MEMORY.md &lt;&lt; 'EOF'
+# Claude Memory
+
+## Key Facts
+- [Populated as Claude learns about you]
+
+## Tool Lessons
+- See tool-lessons.md
+
+## Preferences
+- See preferences.md
+EOF
+
+printf "# Tool Lessons\n\nLog tool failures and correct approaches here." &gt; ~/brain/memory/tool-lessons.md
+printf "# Preferences\n\nLog feedback on format, tone, and approach here." &gt; ~/brain/memory/preferences.md
+printf "# Debugging\n\nLog recurring issues and solutions here." &gt; ~/brain/memory/debugging.md
+printf "# Todos\n\nClaude can read and update this file across sessions." &gt; ~/brain/todos.md</code></pre>
+
+  <h3>Step 3: Wire Claude Code to Your Brain</h3>
+  <h4>Symlink CLAUDE.md</h4>
+  <p>Claude Code looks for <code>~/CLAUDE.md</code> on every session start:</p>
+  <pre><code>ln -sf ~/brain/CLAUDE.md ~/CLAUDE.md</code></pre>
+  <h4>Wire Claude's memory directory</h4>
+  <pre><code>MEMORY_DST="$HOME/.claude/projects/-Users-$(whoami)/memory"
+mkdir -p "$MEMORY_DST"
+cp ~/brain/memory/*.md "$MEMORY_DST/"</code></pre>
+  <h4>Symlink skills and commands</h4>
+  <pre><code>[ -d ~/.claude/skills ] &amp;&amp; mv ~/.claude/skills ~/.claude/skills.bak
+[ -d ~/.claude/commands ] &amp;&amp; mv ~/.claude/commands ~/.claude/commands.bak
+
+ln -sfn ~/brain/skills ~/.claude/skills
+ln -sfn ~/brain/commands ~/.claude/commands</code></pre>
+  <h4>Save as a one-shot setup script</h4>
+  <p>Save as <code>~/brain/scripts/setup-claude.sh</code> so you can re-run it on any machine:</p>
+  <pre><code>#!/bin/bash
+set -e
+
+BRAIN_DIR="$HOME/brain"
+CLAUDE_DIR="$HOME/.claude"
+MEMORY_DST="$CLAUDE_DIR/projects/-Users-$(whoami)/memory"
+
+ln -sf "$BRAIN_DIR/CLAUDE.md" "$HOME/CLAUDE.md"
+
+for sub in skills commands; do
+  if [ -d "$CLAUDE_DIR/$sub" ] &amp;&amp; [ ! -L "$CLAUDE_DIR/$sub" ]; then
+    mv "$CLAUDE_DIR/$sub" "$CLAUDE_DIR/$sub.bak"
+  fi
+  ln -sfn "$BRAIN_DIR/$sub" "$CLAUDE_DIR/$sub"
+done
+
+mkdir -p "$MEMORY_DST"
+cp "$BRAIN_DIR"/memory/*.md "$MEMORY_DST/" 2&gt;/dev/null || true
+
+echo "Done. Claude Code is now using Brain as source of truth."</code></pre>
+
+  <h3>Step 4: Auto-Sync to GitHub</h3>
+  <p>Keeps your brain backed up and accessible from any machine. A cron job commits and pushes every 10 minutes.</p>
+  <h4>Push to GitHub</h4>
+  <pre><code>cd ~/brain
+gh repo create Brain --private --source=. --remote=origin
+git add -A &amp;&amp; git commit -m "initial brain setup"
+git push -u origin main</code></pre>
+  <h4>Create auto-sync.sh</h4>
+  <p>Save as <code>~/brain/scripts/auto-sync.sh</code>:</p>
+  <pre><code>#!/bin/bash
+cd ~/brain || exit 1
+
+if [[ -d .git/rebase-merge || -d .git/rebase-apply ]]; then
+    echo "$(date '+%Y-%m-%d %H:%M') - Rebase in progress, skipping"
+    exit 0
+fi
+
+STASHED=false
+if [[ -n $(git status --porcelain) ]]; then
+    git stash -q &amp;&amp; STASHED=true
+fi
+
+git fetch origin main -q
+if ! git rebase origin/main -q 2&gt;/dev/null; then
+    git rebase --abort 2&gt;/dev/null
+    $STASHED &amp;&amp; git stash pop -q 2&gt;/dev/null
+    echo "$(date '+%Y-%m-%d %H:%M') - Rebase conflict"
+    exit 1
+fi
+
+$STASHED &amp;&amp; git stash pop -q 2&gt;/dev/null
+
+if [[ -n $(git status --porcelain) ]]; then
+    git add -A
+    git commit -q -m "auto-sync $(date '+%Y-%m-%d %H:%M')"
+fi
+
+[[ -n $(git log origin/main..HEAD --oneline) ]] &amp;&amp; git push origin main -q</code></pre>
+  <h4>Install as a cron job</h4>
+  <pre><code>chmod +x ~/brain/scripts/auto-sync.sh
+
+(crontab -l 2&gt;/dev/null; echo "*/10 * * * * $HOME/brain/scripts/auto-sync.sh &gt;&gt; $HOME/brain/scripts/sync.log 2&gt;&amp;1") | crontab -</code></pre>
+
+  <h3>Step 5: Add MCP Servers</h3>
+  <p>MCP (Model Context Protocol) servers give Claude access to external tools: calendar, email, documents, search. Configure in <code>~/.claude/settings.json</code>:</p>
+  <pre><code>{
+  "mcpServers": {
+    "search": {
+      "command": "npx",
+      "args": ["-y", "@anthropic-ai/mcp-server-web-search"]
+    }
+  }
+}</code></pre>
+  <p><strong>Worth installing:</strong> Google Calendar, Gmail, GitHub, Plaid, Granola (meeting transcripts). If you're at a company with Glean, the Glean MCP is where the real magic happens for work context: Slack, email, docs, transcripts, Salesforce, all in one. Full directory at <a href="https://modelcontextprotocol.io" target="_blank" rel="noopener">modelcontextprotocol.io</a>.</p>
+
+  <h3>Step 6: Build Your First Skill</h3>
+  <p>Skills are markdown files that teach Claude to do a specific task. They live in <code>~/brain/skills/</code> and auto-load via the symlink.</p>
+  <h4>Example: Meeting Prep</h4>
+  <p><code>~/brain/skills/meeting-prep/SKILL.md</code>:</p>
+  <pre><code># Meeting Prep
+
+Prepare a briefing for an upcoming meeting.
+
+## Trigger
+When the user says "prep me for [meeting]" or "brief me on [account]"
+
+## Steps
+1. Check local files at ~/brain/work/ for existing context
+2. Search recent communications and documents on the topic
+3. Look up calendar for attendees and agenda
+4. Synthesize into a brief:
+   - Key context and background
+   - Open action items
+   - Suggested talking points
+   - Risks or things to watch for
+
+## Output
+Concise bullets. No fluff. Lead with the most important thing.</code></pre>
+  <h4>Example: Quick Log</h4>
+  <p><code>~/brain/skills/log/SKILL.md</code>:</p>
+  <pre><code># Quick Log
+
+Capture an activity note.
+
+## Trigger
+/log [topic] [what happened]
+
+## Steps
+1. Parse the topic and content
+2. Append a dated entry to the relevant file in ~/brain/
+3. If new action items were mentioned, add them to ~/brain/todos.md
+
+## Format
+## YYYY-MM-DD
+- [bullets of what happened]</code></pre>
+
+  <h3>Step 7: Rules Files</h3>
+  <p>Rules live in <code>~/.claude/rules/</code> and load on every session. Use them for behavioral instructions that should always apply.</p>
+  <h4>Example: <code>~/.claude/rules/work-context.md</code></h4>
+  <pre><code># Work Context
+
+## My Role
+- [Your role and day-to-day]
+- [Key projects or accounts]
+
+## How I Work
+- I prefer [concise / detailed] responses
+- Always [read context first / just dive in]
+- When I say "remember this," add it to ~/brain/notes/ or ~/brain/todos.md
+- When I mention a task I need to do, add it to ~/brain/todos.md</code></pre>
+  <h4>Example: <code>~/.claude/rules/session-rules.md</code></h4>
+  <pre><code># Session Rules
+
+- Read relevant context files before starting work on a topic
+- After finishing substantive work, update the relevant log file
+- Parallelize independent lookups when possible (use subagents)
+- Ask before pushing to GitHub</code></pre>
+
+  <h3>How It All Fits Together</h3>
+  <pre><code>You open a terminal and type: claude
+
+Claude Code starts up and automatically reads:
+  1. ~/CLAUDE.md              -&gt; knows who you are
+  2. ~/.claude/rules/*.md     -&gt; knows your preferences
+  3. ~/.claude/.../MEMORY.md  -&gt; remembers past sessions
+
+You say: "prep me for my meeting with Acme Corp"
+
+Claude:
+  - Reads ~/brain/work/customers/acme-corp/ for context
+  - Uses MCP tools to search recent emails, docs, transcripts
+  - Synthesizes a brief with talking points
+
+After the meeting, you say: "log that we discussed X, Y, Z.
+Action item: send proposal by Friday"
+
+Claude:
+  - Appends a dated entry to ~/brain/work/customers/acme-corp/log.md
+  - Adds "Send Acme proposal by Friday" to ~/brain/todos.md
+
+10 minutes later, auto-sync commits and pushes to GitHub.
+
+Next session, maybe on a different machine, Claude picks up
+right where you left off.</code></pre>
+
+  <h3>Quick Reference</h3>
+  <div class="reference-table">
+    <table>
+      <thead><tr><th>What</th><th>Where</th></tr></thead>
+      <tbody>
+        <tr><td>Master config</td><td><code>~/brain/CLAUDE.md</code> (symlinked to <code>~/CLAUDE.md</code>)</td></tr>
+        <tr><td>Behavioral rules</td><td><code>~/.claude/rules/*.md</code></td></tr>
+        <tr><td>Memory (auto-loaded)</td><td><code>~/.claude/projects/-Users-YOU/memory/MEMORY.md</code></td></tr>
+        <tr><td>Memory (canonical)</td><td><code>~/brain/memory/</code></td></tr>
+        <tr><td>Todos</td><td><code>~/brain/todos.md</code></td></tr>
+        <tr><td>Skills</td><td><code>~/brain/skills/</code> (symlinked to <code>~/.claude/skills/</code>)</td></tr>
+        <tr><td>Commands</td><td><code>~/brain/commands/</code> (symlinked to <code>~/.claude/commands/</code>)</td></tr>
+        <tr><td>Auto-sync</td><td><code>~/brain/scripts/auto-sync.sh</code> (cron, every 10 min)</td></tr>
+        <tr><td>Setup script</td><td><code>~/brain/scripts/setup-claude.sh</code> (run once per machine)</td></tr>
+        <tr><td>GitHub Actions</td><td><code>~/brain/.github/workflows/</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Useful Commands</h3>
+  <pre><code># Start a new session
+claude
+
+# Continue your last session
+claude --continue
+
+# Rename the current session (easier to find later)
+/rename meeting-prep-acme
+
+# Check auto-sync logs
+tail -20 ~/brain/scripts/sync.log</code></pre>
+
+  <h3>Tips</h3>
+  <ol>
+    <li><strong>Start small.</strong> Get CLAUDE.md and the brain repo working first. Add skills and MCPs as you find patterns worth automating.</li>
+    <li><strong>Let Claude update its own memory.</strong> When a tool fails or you correct its output, it should log that in the memory files so it doesn't repeat the mistake.</li>
+    <li><strong>Markdown for everything.</strong> Claude reads and writes markdown natively. Version-controlled, diffable, human-readable.</li>
+    <li><strong>Parallelize.</strong> If you need five independent lookups, Claude can spin up subagents instead of going sequential.</li>
+    <li><strong>Build skills for repetitive work.</strong> Same type of task twice? Write a skill.</li>
+    <li><strong>CLAUDE.md is a living document.</strong> Update it as your role, projects, and preferences change. The more accurate it is, the better Claude performs.</li>
+  </ol>
 
   <div class="callout">
     <p><strong>Warning.</strong> Claude Code can do destructive things. Don't give it unsupervised access to production databases. Don't let it <code>rm -rf</code> blindly. Always confirm before a <code>git push</code>.</p>
