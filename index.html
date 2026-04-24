@@ -1073,6 +1073,17 @@
   <p>Claude Code is Anthropic's CLI. Type plain English and it writes code, edits files, runs commands, and hands back results. Better than ChatGPT for anything touching your actual filesystem. Single biggest productivity unlock I've found in two years.</p>
   <p>This chapter is a full practical walkthrough of the setup I actually run. By the end you'll have a <code>~/brain/</code> repo that Claude reads on every session, auto-synced to GitHub every 10 minutes, with skills and rules that make it yours.</p>
 
+  <h3>Why This Setup</h3>
+  <p>Every Claude Code session starts fresh. No memory of yesterday. The fix: give it a persistent file system it can read on startup and write to during work. The Brain is a private GitHub repo cloned to <code>~/brain/</code>. Claude reads it for context, writes to it after doing work, and a cron job syncs everything to GitHub every 10 minutes. That's the whole system.</p>
+  <p>The result: Claude knows who you are, what you're working on, which projects you manage, what happened last session, and what mistakes it made last time. It picks up where it left off every single time.</p>
+  <p>Everything is markdown. No databases, no config files, no infrastructure. Markdown is what Claude reads and writes best, it's version-controlled, diffable, and you can open any file and understand it without tools.</p>
+  <p><strong>Why this structure works:</strong></p>
+  <ul>
+    <li><strong>Separation of concerns.</strong> Work context (<code>work/</code>) is separate from system context (<code>memory/</code>), which is separate from automation (<code>skills/</code>, <code>scripts/</code>). Claude knows exactly where to look.</li>
+    <li><strong>Customer (or project) folders as units of context.</strong> Each folder has a consistent shape: README (what's true now), log.md (what happened over time), dated files (working outputs). Claude reads the folder and is immediately caught up.</li>
+    <li><strong>Brain is canonical.</strong> Files live in <code>~/brain/</code> and get symlinked to <code>~/.claude/</code>. Never edit the <code>~/.claude/</code> copies directly. One source of truth.</li>
+  </ul>
+
   <h3>What You're Building</h3>
   <pre><code>~/brain/                    # Your private GitHub repo (source of truth)
   CLAUDE.md                 # Who you are, how Claude should work with you
