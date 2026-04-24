@@ -31,20 +31,6 @@ The B-team move, but real. If you already have a consulting background, demand i
 
 ---
 
-## Companies Hiring Non-Traditional Backgrounds
-
-**AI-native labs:** Anthropic, OpenAI, Google DeepMind, xAI, Cohere, Perplexity, Cursor (Anysphere), Magic, Cognition, Replit.
-
-**AI for enterprise:** Glean, Sierra, Writer, Hebbia, Decagon, Crescendo, Scale AI, Mercor.
-
-**AI in verticals:** Harvey (legal), Abridge (healthcare), Hippocratic AI (healthcare).
-
-**AI-forward incumbents:** Vercel, Notion, Figma, Granola, Zapier.
-
-Research the ones in your vertical of interest. Follow their engineers and PMs on Twitter. Build something on their API. Reach out.
-
----
-
 ## The 8 Moves That Actually Work
 
 ### 1. Build in public, loudly.

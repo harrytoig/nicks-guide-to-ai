@@ -1,10 +1,10 @@
 # Nick's Guide to AI
 
-Everything my friend Nick needed after asking, out of a job, "how do I get into AI?" I've been asked some version of that question about a dozen times now, so I finally wrote the answer down.
+**No prerequisites.** No CS degree required. Four years ago I was in finance at Snowflake. Then I watched some YouTube videos, talked to a guy named Max Comolli, and started building. I am now an AI Outcomes Manager at Glean. The ladder is climbable.
 
-This is what I actually did. A year of working memory, distilled. If you do these things in roughly this order, you will be dangerous in six months and employable in a year. I promise nothing.
+**The thesis: learn AI by doing it.** Not by reading about it. Not by grinding courses. Not by polishing your resume. Pay $20 a month for Claude, build five things, and be dangerous in six months.
 
-**There are no prerequisites.** I do not have a CS degree. I spent four years in finance and sales at Snowflake. Then I watched some YouTube videos, talked to a guy named Max Comolli who is very smart, and started building. I am now an AI Outcomes Manager at Glean. The ladder is climbable.
+This guide is structured around a specific end state: **becoming an AIOM** (AI Outcomes Manager) or any adjacent applied-AI role — Forward Deployed Engineer, Solutions Engineer, AI Product Manager, Customer Engineer. These roles exist between the people building frontier models and the customers trying to use them. They're the most gettable jobs in AI if you come from a non-technical background, and they're the ones that actually teach you the craft.
 
 ---
 
