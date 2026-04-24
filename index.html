@@ -112,11 +112,11 @@
   .hero h1 {
     font-family: 'Fraunces', serif;
     font-weight: 900;
-    font-variation-settings: 'opsz' 144, 'SOFT' 30;
-    font-size: clamp(56px, 9vw, 112px);
-    line-height: 0.95;
+    font-variation-settings: 'opsz' 144;
+    font-size: clamp(44px, 7vw, 78px);
+    line-height: 0.98;
     letter-spacing: -0.035em;
-    margin: 0 0 28px;
+    margin: 0 0 24px;
   }
   .hero h1 em {
     font-style: italic;
@@ -127,11 +127,11 @@
     font-family: 'Fraunces', serif;
     font-weight: 500;
     font-style: italic;
-    font-size: clamp(21px, 2.4vw, 28px);
-    line-height: 1.4;
+    font-size: clamp(18px, 1.9vw, 22px);
+    line-height: 1.45;
     color: var(--ink-muted);
-    max-width: 640px;
-    margin: 0 0 40px;
+    max-width: 600px;
+    margin: 0 0 32px;
   }
   .hero-byline {
     font-family: 'JetBrains Mono', monospace;
@@ -163,8 +163,8 @@
   h2 {
     font-family: 'Fraunces', serif;
     font-weight: 700;
-    font-size: clamp(36px, 5vw, 56px);
-    line-height: 1;
+    font-size: clamp(30px, 4vw, 42px);
+    line-height: 1.05;
     letter-spacing: -0.025em;
     margin: 0 0 14px;
     color: var(--ink);
@@ -184,10 +184,10 @@
   h3 {
     font-family: 'Fraunces', serif;
     font-weight: 700;
-    font-size: 26px;
-    line-height: 1.15;
+    font-size: 22px;
+    line-height: 1.2;
     letter-spacing: -0.015em;
-    margin: 56px 0 20px;
+    margin: 48px 0 16px;
   }
   h4 {
     font-family: 'Inter', sans-serif;
@@ -397,7 +397,9 @@
     color: var(--ink);
     transition: padding 0.15s;
   }
-  .toc a:hover { padding-left: 10px; }
+  .toc a:hover { padding-left: 14px; background: var(--accent-soft); }
+  .toc a:hover .toc-title { color: var(--accent-ink); }
+  .toc a:active { background: var(--accent); color: white; }
   .toc-num {
     font-family: 'Fraunces', serif;
     font-weight: 700;
@@ -444,10 +446,10 @@
   .closing-big {
     font-family: 'Fraunces', serif;
     font-weight: 900;
-    font-size: clamp(48px, 7vw, 88px);
-    line-height: 0.95;
-    letter-spacing: -0.03em;
-    margin: 0 0 32px;
+    font-size: clamp(34px, 4.5vw, 52px);
+    line-height: 1.05;
+    letter-spacing: -0.028em;
+    margin: 0 0 24px;
   }
   .closing-big em { font-style: italic; color: var(--accent); }
 
@@ -568,15 +570,95 @@
 
   /* print styles */
   @media print {
-    @page { margin: 24mm 18mm; }
-    body { background: white; color: black; }
-    #progress, .topnav { display: none; }
-    .hero { padding: 0 0 40px; }
-    section.chapter, section.intro, section.closing { padding: 28px 0; page-break-before: auto; }
-    h2 { page-break-after: avoid; }
-    .rung, .tier, .move, .toc a { page-break-inside: avoid; }
-    a { color: black; text-decoration: underline; }
-    .callout, .first-hour, .skill-group, .x-item { background: #f4f0e5; }
+    @page { margin: 16mm 14mm; size: letter; }
+    html, body { background: white; color: black; font-size: 10pt; line-height: 1.45; }
+    #progress, .topnav, .keyboard-hint { display: none !important; }
+    main { max-width: 100%; padding: 0; }
+    .hero { padding: 0 0 20pt; }
+    .hero-eyebrow { font-size: 8pt; margin-bottom: 14pt; }
+    .hero h1 { font-size: 44pt !important; line-height: 0.98; margin: 0 0 14pt; }
+    .hero-tagline { font-size: 13pt !important; margin: 0 0 18pt; }
+    .hero-byline { font-size: 9pt; }
+    .chapter-eyebrow { font-size: 8pt; margin-bottom: 8pt; }
+    h2 { font-size: 26pt !important; line-height: 1.05; margin: 0 0 10pt; page-break-after: avoid; break-after: avoid; }
+    h3 { font-size: 14pt !important; line-height: 1.2; margin: 20pt 0 8pt; page-break-after: avoid; break-after: avoid; }
+    h4 { font-size: 9pt !important; margin: 14pt 0 6pt; }
+    .chapter-subtitle { font-size: 11.5pt !important; margin-bottom: 16pt; line-height: 1.35; }
+    p, li { font-size: 10pt; line-height: 1.45; }
+    .pull { font-size: 12pt !important; margin: 14pt 0; padding-left: 14pt; }
+    .closing-big { font-size: 30pt !important; line-height: 1.08; margin-bottom: 16pt; }
+    section.chapter { padding: 0 0 18pt; page-break-before: always; break-before: page; }
+    section.chapter:first-of-type { page-break-before: auto; break-before: auto; }
+    section.intro { padding: 10pt 0; border-top: none; }
+    section.intro + section.intro { border-top: 1px solid #ccc; padding-top: 14pt; }
+    section.closing { padding: 18pt 0; page-break-before: always; break-before: page; }
+    .rung, .tier, .move, .toc a, .skill-group, .week-day, .media-item, .callout, .first-hour, pre { page-break-inside: avoid; break-inside: avoid; }
+    .rung-num { font-size: 28pt !important; }
+    .move-num { font-size: 36pt !important; }
+    .move { padding: 14pt 0; }
+    .rung { padding: 14pt 0; gap: 16pt; grid-template-columns: 40pt 1fr; }
+    .rung h4 { font-size: 13pt !important; margin-bottom: 4pt; text-transform: none; letter-spacing: -0.01em; }
+    .rung-meta { font-size: 8.5pt; }
+    .rung-teaches { font-size: 9.5pt; margin-top: 8pt; }
+    .toc { margin-top: 18pt; }
+    .toc a { padding: 10pt 0; }
+    .toc-title { font-size: 13pt; }
+    .toc-desc { font-size: 9.5pt; }
+    .toc-num { font-size: 14pt; }
+    .tier { padding: 10pt 14pt; grid-template-columns: 120pt 1fr; }
+    .tier-label { font-size: 12pt; }
+    .tier p { font-size: 9.5pt; }
+    .first-hour { padding: 18pt 22pt; margin: 18pt 0; }
+    .callout { padding: 14pt 18pt; margin: 14pt 0; }
+    .skills-grid { grid-template-columns: 1fr 1fr; gap: 12pt; }
+    .skill-group { padding: 12pt 14pt; }
+    .skill-group h4 { font-size: 10pt !important; margin: 0 0 8pt; }
+    .skill-group li { margin-bottom: 5pt; font-size: 9.5pt; line-height: 1.35; }
+    .skill-group p { font-size: 9.5pt !important; }
+    .x-grid { grid-template-columns: repeat(3, 1fr); gap: 6pt; }
+    .x-item { padding: 7pt 9pt; font-size: 9pt; }
+    .x-item a { font-size: 10pt; }
+    .x-item .x-desc { font-size: 8pt; }
+    .week-day { padding: 8pt 0; grid-template-columns: 80pt 1fr; gap: 16pt; }
+    .week-day-label { font-size: 8pt; }
+    .week-day-content { font-size: 9.5pt; }
+    .media-item { padding: 5pt 0; }
+    .media-name { font-size: 10pt; }
+    .media-desc { font-size: 9pt; }
+    pre { font-size: 9pt; padding: 10pt 14pt; }
+    code { font-size: 9pt; }
+    a { color: #3A24B8; text-decoration: underline; }
+    .callout, .first-hour, .skill-group, .x-item { background: #f4efe2 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .tier.target { background: #ede7ff !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+
+  /* keyboard hint */
+  .keyboard-hint {
+    margin-top: 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-faint);
+    letter-spacing: 0.02em;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .keyboard-hint kbd {
+    font-family: 'JetBrains Mono', monospace;
+    display: inline-block;
+    padding: 2px 7px;
+    background: var(--paper-deep);
+    border: 1px solid var(--rule);
+    border-bottom-width: 2px;
+    border-radius: 4px;
+    font-size: 11px;
+    color: var(--ink-muted);
+    font-weight: 600;
+    line-height: 1.2;
+  }
+  @media (max-width: 700px) {
+    .keyboard-hint { display: none; }
   }
 
   /* mobile tweaks */
@@ -614,6 +696,9 @@
   <h1>Nick's Guide to <em>AI</em></h1>
   <p class="hero-tagline">Learn AI by doing it. A path from zero to AI Native, for anyone aiming at AIOM, Forward Deployed, or any applied-AI role.</p>
   <div class="hero-byline"><strong>by Harry Toig</strong> · AI Outcomes Manager at Glean</div>
+  <div class="keyboard-hint">
+    <kbd>←</kbd><kbd>→</kbd> or <kbd>↑</kbd><kbd>↓</kbd> to move between sections
+  </div>
 </header>
 
 <main>
@@ -1123,11 +1208,58 @@
   function updateProgress() {
     const scrolled = window.scrollY;
     const height = document.documentElement.scrollHeight - window.innerHeight;
-    const pct = (scrolled / height) * 100;
+    const pct = Math.max(0, Math.min(100, (scrolled / height) * 100));
     progress.style.width = pct + '%';
   }
   window.addEventListener('scroll', updateProgress, { passive: true });
+  window.addEventListener('resize', updateProgress, { passive: true });
   updateProgress();
+
+  // keyboard navigation between sections
+  const navTargets = Array.from(document.querySelectorAll('header.hero, main > section'));
+
+  function currentSectionIndex() {
+    const threshold = window.scrollY + 120;
+    let idx = 0;
+    for (let i = 0; i < navTargets.length; i++) {
+      if (navTargets[i].offsetTop <= threshold) idx = i;
+    }
+    return idx;
+  }
+
+  function goTo(index) {
+    const target = navTargets[Math.max(0, Math.min(navTargets.length - 1, index))];
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.target.matches('input, textarea, [contenteditable]')) return;
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    const idx = currentSectionIndex();
+    switch (e.key) {
+      case 'ArrowDown':
+      case 'ArrowRight':
+      case 'PageDown':
+      case ' ':
+        e.preventDefault();
+        goTo(idx + 1);
+        break;
+      case 'ArrowUp':
+      case 'ArrowLeft':
+      case 'PageUp':
+        e.preventDefault();
+        goTo(idx - 1);
+        break;
+      case 'Home':
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        break;
+      case 'End':
+        e.preventDefault();
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        break;
+    }
+  });
 </script>
 
 </body>
